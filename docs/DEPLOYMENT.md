@@ -38,7 +38,7 @@ Satu domain/subdomain milik sekolah (ditanyakan: apakah sekolah sudah punya doma
 ```
 APP_ENV=production   APP_DEBUG=false   APP_TIMEZONE=Asia/Jakarta
 SESSION_DRIVER=database   QUEUE_CONNECTION=database   CACHE_STORE=database
-SESSION_SECURE_COOKIE=true   SANCTUM_STATEFUL_DOMAINS=<domain>
+SESSION_SECURE_COOKIE=true   SESSION_DOMAIN=<domain>
 ```
 Skala kecil: tanpa Redis. Pertimbangkan Redis bila beban tumbuh.
 

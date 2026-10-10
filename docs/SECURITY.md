@@ -6,7 +6,8 @@ tentang Pelindungan Data Pribadi (ini bukan nasihat hukum; konsultasikan sebelum
 
 ## 1. Autentikasi
 
-- Sanctum SPA (cookie sesi `HttpOnly`, `Secure`, `SameSite=Lax`); frontend dan API satu domain.
+- Sesi cookie (`HttpOnly`, `Secure`, `SameSite=Lax`) lewat guard `web` dan grup middleware `web` (CSRF aktif); Sanctum terpasang tetapi belum dipakai. Frontend dan API satu domain.
+- Login lewat `username` (tidak peka huruf besar/kecil); pesan galat sama untuk username tak dikenal; satu verifikasi hash selalu dijalankan agar waktu respons tidak membocorkan username.
 - Hash password bawaan Laravel (bcrypt/argon2id). Minimal 10 karakter, tolak password umum.
 - Password sementara untuk akun baru/reset; **wajib diganti** saat login pertama (middleware).
 - Kunci akun 15 menit setelah 5 kegagalan; throttle login 5/menit per IP+username.

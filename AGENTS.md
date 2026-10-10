@@ -11,7 +11,7 @@ Detail: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/ASSUMPTIONS.md`.
 
 ## 2. Stack (default, dikonfirmasi di T-0.2)
 
-- Backend: Laravel (API), autentikasi Sanctum (SPA)
+- Backend: Laravel (API), autentikasi sesi cookie (guard `web`, grup middleware `web`; Sanctum terpasang tetapi belum dipakai)
 - Frontend: React + Vite
 - Database: MySQL
 - Bahasa kode/identifier: Inggris. Teks antarmuka: Indonesia.

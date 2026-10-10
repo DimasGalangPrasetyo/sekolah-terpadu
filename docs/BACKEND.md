@@ -1,7 +1,7 @@
 # BACKEND — Rancangan
 
 Laravel (versi stabil terbaru yang kompatibel; PHP 8.3+, dikonfirmasi di A-02), MySQL 8.
-Paket: `laravel/sanctum`, `spatie/laravel-permission`. Tambahan paket hanya lewat kartu tugas.
+Paket: `spatie/laravel-permission` (izin). `laravel/sanctum` terpasang tetapi **belum dipakai**: autentikasi memakai sesi cookie (guard `web`) lewat grup middleware `web` pada rute API (cookie terenkripsi, sesi, CSRF). SPA memanggil `GET /sanctum/csrf-cookie` lebih dulu. Tambahan paket hanya lewat kartu tugas.
 
 ## 1. Lapisan
 
