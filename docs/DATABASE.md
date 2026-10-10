@@ -14,9 +14,9 @@ Uang = `BIGINT` rupiah. FK `ON DELETE RESTRICT` kecuali disebut lain.
 | `roles`, `permissions`, `model_has_roles`, `model_has_permissions`, `role_has_permissions` | Bawaan spatie | Seed: 3 peran |
 | `sessions` | Bawaan Laravel (driver `database`) | Nonaktif akun → hapus sesi |
 | `audit_logs` | `user_id`?, `event`, `auditable_type`?, `auditable_id`?, `old_values` JSON?, `new_values` JSON?, `ip_address`, `user_agent`, `created_at` | Hanya tulis; tanpa UI hapus. Indeks `(auditable_type, auditable_id)`, `(user_id, created_at)` |
-| `settings` | `key` UQ, `value` JSON | Pengaturan umum (ukuran kwitansi, dll.) |
+| `settings` | `setting_key` UQ, `value` JSON | Pengaturan umum (ukuran kwitansi, dll.) |
 | `school_profiles` | `foundation_name`, `address`, `phone`, `email`, `logo_path`?, `letterhead` JSON? | Satu baris |
-| `number_sequences` | `key`, `period`, `last_number`; UQ `(key, period)` | Penomoran aman (kunci baris) |
+| `number_sequences` | `sequence_key`, `period`, `last_number`; UQ `(sequence_key, period)` | Penomoran aman (kunci baris) |
 
 ## 2. Struktur sekolah
 
@@ -93,7 +93,7 @@ Laporan kas = saldo awal + (pembayaran siswa valid + kas masuk) − kas keluar. 
 |---|---|---|
 | `asset_categories` | `code`, `name` | |
 | `locations` | `unit_id`?, `name`, `description`? | Ruang/lokasi |
-| `assets` (SD) | `code` UQ, `name`, `asset_category_id`, `unit_id`? (null = bersama), `location_id`, `quantity`, `unit_label`, `acquisition_date`?, `acquisition_source`?, `acquisition_cost`?, `condition`, `responsible_staff_id`?, `photo_path`?, `status` (active/disposed), `notes`? | |
+| `assets` (SD) | `code` UQ, `name`, `asset_category_id`, `unit_id`? (null = bersama), `location_id`, `quantity`, `unit_label`, `acquisition_date`?, `acquisition_source`?, `acquisition_cost`?, `item_condition`, `responsible_staff_id`?, `photo_path`?, `status` (active/disposed), `notes`? | |
 | `asset_movements` | `asset_id`, `type` (move/condition/dispose), `from_location_id`?, `to_location_id`?, `from_condition`?, `to_condition`?, `moved_at`, `notes`?, `created_by` | |
 
 Kondisi: `good`, `light_damage`, `heavy_damage`, `lost`, `disposed`.
@@ -120,3 +120,13 @@ Kondisi: `good`, `light_damage`, `heavy_damage`, `lost`, `disposed`.
 
 Peran + permission, 3 unit, grade level, satu akun `superadmin`, kategori kas dan jenis biaya awal,
 dan **data dummy** (≈75 siswa lintas unit, staf, rombel, satu template rapor generik).
+
+## 10. Catatan implementasi (Pack 1)
+
+- Kolom diganti agar tidak bentrok dengan kata cadangan MySQL: `condition` → `item_condition` (aset), `key` → `setting_key` / `sequence_key`.
+- Tabel `staff` dibuat di migrasi pertama (bersama `users`) supaya FK `users.staff_id` valid.
+- Banyak kolom dibuat `nullable` di database agar impor dan data dummy tidak tersendat; **kewajiban isian ditegakkan oleh validasi (FormRequest)**, bukan oleh DB.
+- Ukuran/margin/offset rapor memakai `decimal(…, 1)` dalam mm (mis. 0,5 mm).
+- Nilai `gender` memakai `L` / `P` (enum `Gender`).
+- Constraint `UNIQUE` tidak mencegah duplikat jika salah satu kolomnya `NULL` (perilaku MySQL dan SQLite). Berlaku untuk `fee_rates` (tarif tanpa tingkat) dan `invoices` bertipe `one_time`; pencegahan duplikatnya dilakukan service.
+- Peran: `superadmin`, `admin_tu_keuangan`, `guru` (wali kelas = penugasan `classrooms.homeroom_staff_id`).
