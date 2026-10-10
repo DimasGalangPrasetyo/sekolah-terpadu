@@ -1,5 +1,3 @@
-@'
-
 # Sekolah Terpadu
 
 Aplikasi Sekolah Terpadu merupakan prototype sistem pengelolaan informasi sekolah yang sedang dikembangkan.
@@ -13,4 +11,3 @@ Aplikasi Sekolah Terpadu merupakan prototype sistem pengelolaan informasi sekola
 ## Status
 
 Prototype dalam pengembangan
-'@ | Set-Content -Path ".\README.md" -Encoding utf8
