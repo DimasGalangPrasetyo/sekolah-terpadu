@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AuditLogController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Users\StaffOptionController;
 use App\Http\Controllers\Api\V1\Users\UserController;
 use App\Http\Middleware\EnsurePasswordChanged;
 use App\Http\Middleware\ForceJson;
@@ -25,6 +26,7 @@ Route::prefix('v1')->middleware([ForceJson::class, 'web'])->group(function () {
         Route::middleware(EnsurePasswordChanged::class)->group(function () {
             Route::middleware('can:users.manage')->group(function () {
                 Route::get('roles', [UserController::class, 'roles']);
+                Route::get('staff-options', [StaffOptionController::class, 'index']);
                 Route::get('users', [UserController::class, 'index']);
                 Route::post('users', [UserController::class, 'store']);
                 Route::get('users/{user}', [UserController::class, 'show']);

@@ -1,7 +1,7 @@
 # FRONTEND — Rancangan
 
 React + Vite + **TypeScript**. UI: **Ant Design** (locale `id_ID`, `dayjs`).
-Data server: **TanStack Query** + Axios. State UI/auth: **Zustand**. Form: **React Hook Form + Zod**.
+Data server: **TanStack Query** + Axios. **Status login = cache TanStack Query** (kunci `['auth','me']`); **Zustand** hanya untuk preferensi tampilan (unit, menu). Form admin: **Form bawaan Ant Design**; React Hook Form + Zod tersedia untuk form kompleks (mis. workspace rapor).
 Routing: React Router. Satu library UI saja; jangan campur dengan yang lain.
 
 ## 1. Struktur
@@ -97,3 +97,11 @@ Kwitansi default A5 (ukuran dapat diatur di pengaturan). Stylesheet cetak di `st
 
 Tes komponen untuk util format, guard peran, dan komponen render rapor; satu alur uji manual terskrip untuk demo.
 Lint (`npm run lint`) dan `npm run build` harus lulus.
+
+## 9. Catatan implementasi (Pack 3)
+
+- Dev: Vite meneruskan `/api` dan `/sanctum` ke `http://127.0.0.1:8000` (satu asal untuk browser, cookie dan CSRF jalan tanpa CORS).
+- Halaman berat (akun, audit, ganti password) dimuat lazy; unduhan awal lebih ringan.
+- Breakpoint tata letak: **< 992 px = mode HP/tablet** (menu geser, pemilih unit ringkas). Lihat `docs/UI_GUIDE.md`.
+- Keluar otomatis setelah 30 menit tanpa aktivitas, dengan peringatan 60 detik.
+- Versi: antd 6 (gunakan `title` pada Alert, `size` pada Drawer, `mask.closable` pada Modal), React Router 7, TypeScript 6.
