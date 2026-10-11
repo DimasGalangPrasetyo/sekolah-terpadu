@@ -1,5 +1,6 @@
 import axios, { isAxiosError, type InternalAxiosRequestConfig } from 'axios'
 import { queryClient } from '../app/queryClient'
+import { clearClientSession } from '../app/session'
 import { meKey } from '../features/auth/meKey'
 import type { ApiErrorBody } from '../types/api'
 
@@ -40,7 +41,7 @@ http.interceptors.response.use(
 
     // Sesi berakhir: tandai belum masuk; penjaga rute akan mengarahkan ke halaman masuk.
     if (status === 401 && !PUBLIC_PATHS.some((p) => url.endsWith(p))) {
-      queryClient.setQueryData(meKey, null)
+      clearClientSession()
     }
 
     // Password sementara belum diganti: segarkan profil agar penjaga rute mengarahkan ke ganti password.

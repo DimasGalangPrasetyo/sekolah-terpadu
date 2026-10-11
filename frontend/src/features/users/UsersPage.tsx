@@ -152,7 +152,12 @@ export function UsersPage() {
           menu={{
             items: [
               { key: 'edit', icon: <EditOutlined />, label: 'Ubah data' },
-              { key: 'reset', icon: <KeyOutlined />, label: 'Reset password' },
+              {
+                key: 'reset',
+                icon: <KeyOutlined />,
+                label: user.id === me?.id ? 'Reset password (akun sendiri: pakai Ganti password)' : 'Reset password',
+                disabled: user.id === me?.id,
+              },
               {
                 key: 'toggle',
                 icon: user.is_active ? <StopOutlined /> : <CheckCircleOutlined />,

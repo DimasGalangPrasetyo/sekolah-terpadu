@@ -1,15 +1,13 @@
 import { logoutRequest } from '../../api/auth'
-import { queryClient } from '../../app/queryClient'
-import { meKey } from './meKey'
+import { clearClientSession } from '../../app/session'
 
-/** Keluar: abaikan galat jaringan (sesi di sisi server akan kedaluwarsa sendiri), bersihkan cache lokal. */
+/** Keluar: abaikan galat jaringan (sesi di server kedaluwarsa sendiri), selalu bersihkan sisi klien. */
 export async function performLogout(): Promise<void> {
   try {
     await logoutRequest()
   } catch {
     // tetap bersihkan sisi klien
   } finally {
-    queryClient.clear()
-    queryClient.setQueryData(meKey, null)
+    clearClientSession()
   }
 }

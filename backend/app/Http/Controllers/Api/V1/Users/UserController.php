@@ -107,8 +107,13 @@ class UserController extends Controller
         return new UserResource($user->fresh()->load('roles', 'staff'));
     }
 
-    public function resetPassword(User $user): JsonResponse
+    public function resetPassword(Request $request, User $user): JsonResponse
     {
+        // Mereset akun sendiri akan mengakhiri sesi yang sedang dipakai; arahkan ke "Ganti password".
+        if ($request->user()->is($user)) {
+            throw ValidationException::withMessages(['user' => ['Untuk akun Anda sendiri, gunakan menu Ganti password.']]);
+        }
+
         $temporary = $this->temporaryPassword();
 
         $user->forceFill([

@@ -94,7 +94,7 @@ export function AppLayout() {
     ],
     onClick: ({ key }) => {
       if (key === 'password') navigate('/ganti-password')
-      if (key === 'logout') void performLogout()
+      if (key === 'logout') void performLogout().then(() => navigate('/masuk', { replace: true }))
     },
   }
 
@@ -190,7 +190,7 @@ export function AppLayout() {
         okText="Tetap masuk"
         cancelText="Keluar sekarang"
         onOk={stay}
-        onCancel={() => void performLogout()}
+        onCancel={() => void performLogout().then(() => navigate('/masuk', { replace: true }))}
       >
         Anda tidak aktif beberapa saat. Demi keamanan, Anda akan keluar otomatis dalam{' '}
         <strong>{secondsLeft ?? 0} detik</strong>.
