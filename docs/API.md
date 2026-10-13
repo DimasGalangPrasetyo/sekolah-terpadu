@@ -105,3 +105,22 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 
 ## Throttle
 Login 5/menit per IP+username; API umum 120/menit per pengguna.
+
+## Pembaruan Pack 4 (Data Master dan Siswa)
+
+Endpoint yang dibangun (menggantikan rincian lama di atas bila berbeda). Parameter rute memakai nama model.
+
+| Method | Path | Izin | Keterangan |
+|---|---|---|---|
+| GET | `/units`, `/grade-levels?unit_id=`, `/academic-context` | master.view | Rujukan dan tahun ajaran/semester aktif |
+| GET | `/academic-years` | master.view | Daftar + semester + jumlah rombel |
+| POST/PUT/DELETE | `/academic-years[/{id}]` | master.manage | Buat/ubah dengan dua semester; hapus ditolak (409) bila aktif/punya rombel |
+| POST | `/academic-years/{id}/activate`, `/semesters/{id}/activate` | master.manage | Satu tahun dan satu semester aktif (aktivasi semester ikut mengaktifkan tahunnya) |
+| GET | `/classrooms?academic_year_id=&unit=&grade_level_id=` | master.view | Default: tahun aktif; memuat `students_count` |
+| POST/PUT/DELETE | `/classrooms[/{id}]` | master.manage | Wali kelas: guru aktif, satu rombel per tahun; hapus ditolak bila ada siswa |
+| GET | `/teacher-options?q=` | master.manage | Guru aktif + penanda sudah menjadi wali kelas |
+| GET | `/students?q=&status=&unit=&classroom_id=&unplaced=` | students.view | Guru hanya melihat siswa rombel yang diwalikannya |
+| GET | `/students/{id}` | students.view | Detail + wali + riwayat status (403 bila bukan siswanya) |
+| POST/PUT/DELETE | `/students[/{id}]` | students.manage | Wali di-sinkron (id: ubah, tanpa id: tambah, hilang: hapus); hapus ditolak (409) bila ada keuangan/rapor |
+| POST | `/students/{id}/status` | students.manage | Mutasi; keluar/lulus menutup enrollment tahun aktif |
+| PUT | `/students/{id}/enrollment` | students.manage | Tempatkan/pindah rombel (memperbarui enrollment yang sama) |

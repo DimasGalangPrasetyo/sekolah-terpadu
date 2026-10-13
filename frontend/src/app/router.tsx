@@ -5,14 +5,20 @@ import { DashboardPage } from '../features/dashboard/DashboardPage'
 import { NotFoundPage } from '../features/errors/NotFoundPage'
 import { ComingSoon } from '../components/ComingSoon'
 import { AppLayout } from './AppLayout'
-import { AuditLogPage, ChangePasswordPage, UsersPage } from './lazyPages'
+import {
+  AuditLogPage,
+  ChangePasswordPage,
+  MasterPage,
+  StudentDetailPage,
+  StudentFormPage,
+  StudentsPage,
+  UsersPage,
+} from './lazyPages'
 import { GuestOnly, RequireAuth, RequirePermission } from './guards'
 import { NAV_ITEMS } from './navigation'
 
 const planned: Record<string, string[]> = {
-  students: ['Buku induk digital TK, SD, SMP', 'Data wali dan riwayat mutasi', 'Penempatan siswa di rombel', 'Pencarian dan impor data'],
   staff: ['Data guru dan tenaga kependidikan', 'Penugasan ke unit', 'Penetapan wali kelas per rombel'],
-  master: ['Tahun ajaran dan semester aktif', 'Rombel per tahun ajaran', 'Mata pelajaran'],
   finance: ['Jenis biaya dan tarif per tingkat', 'Tagihan SPP dan pembayaran', 'Kwitansi dan kas', 'Laporan keuangan per unit'],
   inventory: ['Daftar aset dan lokasi', 'Kondisi dan perpindahan aset'],
   reportcards: ['Form isian di kiri, pratinjau halaman di kanan', 'Pengaturan kertas dan kalibrasi cetak', 'Simpan sebagai PDF atau cetak langsung'],
@@ -37,6 +43,11 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardPage /> },
       ...modulePages,
+      { path: 'master', element: <RequirePermission permission="master.manage"><MasterPage /></RequirePermission> },
+      { path: 'siswa', element: <RequirePermission permission="students.view"><StudentsPage /></RequirePermission> },
+      { path: 'siswa/baru', element: <RequirePermission permission="students.manage"><StudentFormPage /></RequirePermission> },
+      { path: 'siswa/:id', element: <RequirePermission permission="students.view"><StudentDetailPage /></RequirePermission> },
+      { path: 'siswa/:id/ubah', element: <RequirePermission permission="students.manage"><StudentFormPage /></RequirePermission> },
       { path: 'akun', element: <RequirePermission permission="users.manage"><UsersPage /></RequirePermission> },
       { path: 'audit', element: <RequirePermission permission="audit.view"><AuditLogPage /></RequirePermission> },
       { path: '*', element: <NotFoundPage /> },

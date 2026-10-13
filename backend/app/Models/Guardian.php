@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use App\Enums\GuardianRelation;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Guardian extends Model
 {
+    use Auditable;
+
+    /** Data pribadi tidak disalin ke audit log. */
+    protected array $auditExclude = ['address', 'phone'];
+
     protected $fillable = [
         'student_id',
         'relation',

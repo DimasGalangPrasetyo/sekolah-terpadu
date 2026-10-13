@@ -130,3 +130,9 @@ dan **data dummy** (≈75 siswa lintas unit, staf, rombel, satu template rapor g
 - Nilai `gender` memakai `L` / `P` (enum `Gender`).
 - Constraint `UNIQUE` tidak mencegah duplikat jika salah satu kolomnya `NULL` (perilaku MySQL dan SQLite). Berlaku untuk `fee_rates` (tarif tanpa tingkat) dan `invoices` bertipe `one_time`; pencegahan duplikatnya dilakukan service.
 - Peran: `superadmin`, `admin_tu_keuangan`, `guru` (wali kelas = penugasan `classrooms.homeroom_staff_id`).
+
+## 11. Catatan implementasi (Pack 4)
+
+- **Pindah rombel dalam satu tahun** memperbarui baris `student_enrollments` yang sama (bukan menutup lalu membuka baris baru), karena `UNIQUE (student_id, academic_year_id)` hanya mengizinkan satu enrollment per tahun. Perubahannya tercatat di audit log.
+- Model `Student`, `Guardian`, `StudentEnrollment`, `Classroom`, `AcademicYear`, `Semester` memakai trait `Auditable`. **Alamat, telepon, catatan, dan foto tidak disalin ke audit log** (data pribadi).
+- Tahun ajaran/semester aktif hanya diubah lewat `AcademicContext` (transaksi); mass-update tidak memicu audit per model, jadi aktivasi dicatat eksplisit (`academic_year_activated`, `semester_activated`).

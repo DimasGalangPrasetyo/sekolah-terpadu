@@ -36,8 +36,34 @@ export const AUDIT_EVENT_LABELS: Record<string, string> = {
   role_changed: 'Peran diubah',
   user_activated: 'Akun diaktifkan',
   user_deactivated: 'Akun dinonaktifkan',
+  academic_year_activated: 'Tahun ajaran diaktifkan',
+  semester_activated: 'Semester diaktifkan',
 }
 
 /** Batas waktu menganggur sebelum peringatan, dan lama peringatan sebelum keluar otomatis. */
 export const IDLE_MINUTES = 30
 export const IDLE_WARNING_SECONDS = 60
+
+export const STUDENT_STATUS_LABELS: Record<string, string> = {
+  active: 'Aktif',
+  inactive: 'Nonaktif',
+  transferred: 'Pindah',
+  dropped: 'Keluar',
+  graduated: 'Lulus',
+}
+
+export const STUDENT_STATUS_COLORS: Record<string, string> = {
+  active: 'success',
+  inactive: 'default',
+  transferred: 'warning',
+  dropped: 'error',
+  graduated: 'processing',
+}
+
+export const GENDER_LABELS: Record<string, string> = { L: 'Laki-laki', P: 'Perempuan' }
+
+export const GUARDIAN_LABELS: Record<string, string> = { father: 'Ayah', mother: 'Ibu', guardian: 'Wali' }
+
+export const SEMESTER_LABELS: Record<string, string> = { ganjil: 'Ganjil', genap: 'Genap' }
+
+export const RELIGIONS = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya']

@@ -3,6 +3,7 @@ import { Avatar, Button, Drawer, Dropdown, Flex, Layout, Menu, Modal, Spin, Typo
 import type { MenuProps } from 'antd'
 import { Suspense, useMemo, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { AcademicContextTag } from '../components/AcademicContextTag'
 import { UnitSwitcher } from '../components/UnitSwitcher'
 import { performLogout } from '../features/auth/actions'
 import { useMe } from '../features/auth/useMe'
@@ -10,6 +11,7 @@ import { useIdleLogout } from '../hooks/useIdleLogout'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { IDLE_MINUTES, IDLE_WARNING_SECONDS, ROLE_LABELS } from '../lib/constants'
 import { initials } from '../lib/format'
+import { can } from '../lib/permissions'
 import { useUiStore } from '../stores/ui'
 import { activeNavKey, visibleNav } from './navigation'
 
@@ -157,6 +159,8 @@ export function AppLayout() {
             <UnitSwitcher compact={isMobile} />
           </Flex>
 
+          <Flex align="center" gap={8}>
+          {!isMobile && can(user, 'master.view') && <AcademicContextTag />}
           <Dropdown menu={userMenu} trigger={['click']} placement="bottomRight">
             <Button type="text" style={{ height: 'auto', padding: '4px 8px' }} aria-label="Menu pengguna">
               <Flex align="center" gap={8}>
@@ -172,6 +176,7 @@ export function AppLayout() {
               </Flex>
             </Button>
           </Dropdown>
+          </Flex>
         </Header>
 
         <Content style={{ padding: isMobile ? 12 : 24, minWidth: 0 }}>

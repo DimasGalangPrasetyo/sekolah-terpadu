@@ -4,13 +4,17 @@ namespace App\Models;
 
 use App\Enums\Gender;
 use App\Enums\StudentStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Model
 {
-    use SoftDeletes;
+    use Auditable, SoftDeletes;
+
+    /** Data pribadi tidak disalin ke audit log. */
+    protected array $auditExclude = ['address', 'phone', 'notes', 'photo_path'];
 
     protected $fillable = [
         'nis',
