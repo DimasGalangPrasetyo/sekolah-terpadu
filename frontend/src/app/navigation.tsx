@@ -11,22 +11,14 @@ import {
   UserSwitchOutlined,
   WalletOutlined,
 } from '@ant-design/icons'
-import type { ReactNode } from 'react'
 import { can } from '../lib/permissions'
 import type { AuthUser } from '../types/api'
+import type { NavItem } from './moduleTypes'
+import { MODULES } from './modules'
 
-export interface NavItem {
-  key: string
-  path: string
-  label: string
-  description: string
-  icon: ReactNode
-  /** Salah satu izin ini cukup. Kosong = semua pengguna. */
-  permission?: string[]
-  group: 'main' | 'settings'
-}
+export type { NavItem }
 
-export const NAV_ITEMS: NavItem[] = [
+const BASE_NAV: NavItem[] = [
   { key: 'home', path: '/', label: 'Beranda', description: 'Ringkasan dan pintasan', icon: <HomeOutlined />, group: 'main' },
   { key: 'students', path: '/siswa', label: 'Siswa', description: 'Buku induk, wali, dan mutasi siswa TK, SD, SMP', icon: <TeamOutlined />, permission: ['students.view'], group: 'main' },
   { key: 'staff', path: '/staf', label: 'Staf', description: 'Data guru dan tenaga kependidikan, wali kelas', icon: <IdcardOutlined />, permission: ['staff.view'], group: 'main' },
@@ -39,6 +31,8 @@ export const NAV_ITEMS: NavItem[] = [
   { key: 'users', path: '/akun', label: 'Akun dan Peran', description: 'Kelola akun pengguna', icon: <UserSwitchOutlined />, permission: ['users.manage'], group: 'settings' },
   { key: 'audit', path: '/audit', label: 'Audit Log', description: 'Jejak aktivitas penting', icon: <AuditOutlined />, permission: ['audit.view'], group: 'settings' },
 ]
+
+export const NAV_ITEMS: NavItem[] = [...BASE_NAV, ...MODULES.flatMap((m) => m.nav ?? [])]
 
 /** Menu yang boleh dilihat pengguna ini. Guru hanya melihat Rapor bila ia wali kelas. */
 export function visibleNav(user: AuthUser): NavItem[] {

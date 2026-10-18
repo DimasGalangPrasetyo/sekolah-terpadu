@@ -36,3 +36,21 @@ pre {
     min-height: 44px;
   }
 }
+
+/* Cetak: hanya #print-root yang tampil (diisi oleh PrintJob). */
+#print-root {
+  display: none;
+}
+
+@media print {
+  body.is-printing {
+    background: #fff;
+    overflow: visible;
+  }
+  body.is-printing > *:not(#print-root) {
+    display: none !important;
+  }
+  body.is-printing > #print-root {
+    display: block !important;
+  }
+}

@@ -1,0 +1,124 @@
+/* Lembar rapor: dipakai sama persis untuk pratinjau dan cetak (WYSIWYG). */
+.rp {
+  color: #000;
+  line-height: 1.35;
+  word-break: break-word;
+}
+.rp * {
+  box-sizing: border-box;
+}
+.rp-kop {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.rp-kop .rp-org {
+  font-weight: 700;
+  font-size: 1.25em;
+  text-transform: uppercase;
+}
+.rp-kop .rp-unit {
+  font-weight: 700;
+}
+.rp-kop .rp-small {
+  font-size: 0.85em;
+}
+.rp-title {
+  text-align: center;
+  font-weight: 700;
+  margin: 8px 0 12px;
+  text-transform: uppercase;
+}
+.rp-title small {
+  display: block;
+  font-weight: 400;
+  text-transform: none;
+}
+.rp-section {
+  margin-bottom: 12px;
+}
+.rp-heading {
+  font-weight: 700;
+  margin: 8px 0 4px;
+  break-after: avoid;
+}
+.rp table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.rp .rp-grid th,
+.rp .rp-grid td {
+  border: 1px solid #000;
+  padding: 3px 6px;
+  vertical-align: top;
+  text-align: left;
+}
+.rp .rp-grid th {
+  text-align: center;
+  background: #efefef;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.rp .rp-grid tr {
+  break-inside: avoid;
+}
+.rp .rp-plain td {
+  padding: 1px 4px 1px 0;
+  vertical-align: top;
+}
+.rp .rp-center {
+  text-align: center !important;
+}
+.rp-text {
+  border: 1px solid #000;
+  padding: 6px 8px;
+  min-height: 30mm;
+  white-space: pre-wrap;
+}
+.rp-sign {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+  break-inside: avoid;
+}
+.rp-sign > div {
+  flex: 1;
+  text-align: center;
+}
+.rp-sign .rp-space {
+  height: 20mm;
+}
+.rp-sign .rp-name {
+  font-weight: 700;
+  text-decoration: underline;
+  min-height: 1.35em;
+}
+.rp-date {
+  text-align: right;
+  margin-top: 12px;
+}
+.rp-batch-page {
+  break-after: page;
+}
+.rp-batch-page:last-child {
+  break-after: auto;
+}
+
+/* Lembar cetak uji (kalibrasi). */
+.rp-test {
+  position: relative;
+  border: 0.5mm solid #000;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.25) 0.2mm, transparent 0.2mm),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0.2mm, transparent 0.2mm);
+  background-size: 10mm 10mm;
+  font-family: Arial, sans-serif;
+  font-size: 9pt;
+}
+.rp-test .rp-test-label {
+  position: absolute;
+  background: #fff;
+  padding: 0 2mm;
+}

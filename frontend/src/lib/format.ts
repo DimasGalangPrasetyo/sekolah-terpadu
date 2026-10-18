@@ -29,3 +29,7 @@ export function initials(name: string): string {
     .map((part) => part[0]?.toUpperCase() ?? '')
     .join('')
 }
+
+export function formatLongDate(iso: string | Date | null | undefined): string {
+  return iso ? dayjs(iso).format('D MMMM YYYY') : '-'
+}

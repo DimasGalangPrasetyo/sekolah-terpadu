@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use App\Enums\ReportCardStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ReportCard extends Model
 {
+    use Auditable;
+
+    /** Isian rapor tidak disalin ke audit log (autosave akan berisik dan memuat data anak). */
+    protected array $auditExclude = ['data'];
+
     protected $fillable = [
         'student_id',
         'enrollment_id',

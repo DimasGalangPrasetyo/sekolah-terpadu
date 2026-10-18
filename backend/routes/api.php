@@ -78,6 +78,12 @@ Route::prefix('v1')->middleware([ForceJson::class, 'web'])->group(function () {
                 Route::post('students/{student}/status', [StudentController::class, 'changeStatus']);
                 Route::put('students/{student}/enrollment', [StudentController::class, 'place']);
             });
+
+            // --- Modul tambahan: setiap berkas di routes/v1/*.php dimuat otomatis di grup ini ---
+            // Menambah modul baru cukup membuat berkas baru di sana (tanpa mengubah berkas ini).
+            foreach (glob(base_path('routes/v1/*.php')) ?: [] as $moduleRoutes) {
+                Route::group([], $moduleRoutes);
+            }
         });
     });
 });

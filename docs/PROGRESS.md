@@ -13,7 +13,10 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | A-03 | Selesai | 2026-10-10 | task/A-03-auth | Pack 2 (backend): login username, ganti password, kunci akun; semua tes lulus |
 | A-08b / A-08c | Selesai (backend) | 2026-10-10 | task/A-03-auth | Manajemen akun dan audit log; UI ada di Pack 3 |
 | A-UI-1 | Selesai | 2026-10-11 | main | Pack 3 + perbaikan 3.1 (tombol Keluar); 40 tes lulus; login, dashboard, logout teruji manual |
-| A-06 | Berjalan | 2026-10-12 | task/A-06-master-students | Pack 4: Data Master (tahun ajaran, semester, rombel) dan Siswa (buku induk, wali, mutasi, penempatan) |
+| A-06 | Selesai | 2026-10-13 | main | Pack 4: Data Master dan Siswa; 76 tes lulus; teruji manual |
+| A-08 | Berjalan | 2026-10-14 | main | Pack 5: workspace rapor (form + pratinjau + cetak), profil sekolah, titik perluasan modul |
+| A-07 | Belum | | | Staf: kartu untuk Antigravity (`docs/agent-cards/CARD_STAF.md`) |
+| A-09 | Belum | | | Inventaris: kartu untuk Antigravity (`docs/agent-cards/CARD_INVENTARIS.md`) |
 
 (Status: Belum, Berjalan, Berhenti, Selesai)
 
@@ -41,3 +44,6 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | 2026-10-12 | Pindah rombel memperbarui enrollment yang sama | Constraint unik siswa+tahun ajaran |
 | 2026-10-12 | Data pribadi (alamat, telepon, catatan) tidak masuk audit log | Minimalisasi data pribadi anak |
 | 2026-10-12 | Guru hanya melihat siswa rombel yang diwalikannya (disaring di server) | Hak akses berbasis penugasan |
+| 2026-10-14 | Modul baru ditambahkan lewat berkas baru (`routes/v1/*.php`, `features/*/module.tsx`), bukan mengubah berkas bersama | Agen dan paket PM dapat bekerja paralel tanpa saling menimpa |
+| 2026-10-14 | Cetak rapor lewat dialog cetak browser dengan `@page` dinamis dan kalibrasi offset; PDF server ditunda | Cukup untuk demo dan kertas khusus; tanpa dependensi server |
+| 2026-10-14 | Kerja langsung di `main` sampai demo | Satu pengembang, waktu singkat |

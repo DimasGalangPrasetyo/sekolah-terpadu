@@ -124,3 +124,21 @@ Endpoint yang dibangun (menggantikan rincian lama di atas bila berbeda). Paramet
 | POST/PUT/DELETE | `/students[/{id}]` | students.manage | Wali di-sinkron (id: ubah, tanpa id: tambah, hilang: hapus); hapus ditolak (409) bila ada keuangan/rapor |
 | POST | `/students/{id}/status` | students.manage | Mutasi; keluar/lulus menutup enrollment tahun aktif |
 | PUT | `/students/{id}/enrollment` | students.manage | Tempatkan/pindah rombel (memperbarui enrollment yang sama) |
+
+## Pembaruan Pack 5 (Rapor dan Profil Sekolah)
+
+Rute modul baru dimuat otomatis dari `backend/routes/v1/*.php` (lihat `docs/MODULE_GUIDE.md`).
+
+| Method | Path | Izin | Keterangan |
+|---|---|---|---|
+| GET | `/school-profile` | login | Profil yayasan/sekolah + nama kepala sekolah per unit |
+| PUT | `/school-profile` | system.manage | Ubah profil (kop rapor, laporan, kwitansi) |
+| GET | `/report-cards/classrooms` | reportcards.fill/manage | Rombel SD/SMP yang boleh dikerjakan (TU semua, guru rombel yang diwalikannya) |
+| GET | `/report-cards?classroom_id=` | idem | Siswa rombel + status rapor semester aktif + hitungan |
+| POST | `/report-cards` | idem | Buka rapor siswa `{student_id}`: membuat draft terisi dari template bila belum ada |
+| GET | `/report-cards/{id}` | policy `view` | Rapor lengkap: isian, siswa, rombel, template (definisi + pengaturan halaman), kop sekolah, `editable` |
+| PUT | `/report-cards/{id}` | policy `update` | Simpan isian `{data}` (divalidasi terhadap definisi template; kunci/kolom asing ditolak) |
+| POST | `/report-cards/{id}/finalize` | policy `update` | Finalkan |
+| POST | `/report-cards/{id}/unlock` | reportcards.unlock | Buka kunci `{reason}` (TU) |
+| POST | `/report-cards/{id}/printed` | policy `view` | Catat pencetakan ke audit log |
+| GET | `/report-cards/batch?classroom_id=` | idem | Semua rapor final satu rombel (cetak sekaligus) |

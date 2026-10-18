@@ -38,6 +38,10 @@ export const AUDIT_EVENT_LABELS: Record<string, string> = {
   user_deactivated: 'Akun dinonaktifkan',
   academic_year_activated: 'Tahun ajaran diaktifkan',
   semester_activated: 'Semester diaktifkan',
+  report_card_finalized: 'Rapor difinalkan',
+  report_card_unlocked: 'Kunci rapor dibuka',
+  report_card_printed: 'Rapor dicetak',
+  school_profile_updated: 'Profil sekolah diubah',
 }
 
 /** Batas waktu menganggur sebelum peringatan, dan lama peringatan sebelum keluar otomatis. */

@@ -105,3 +105,12 @@ Lint (`npm run lint`) dan `npm run build` harus lulus.
 - Breakpoint tata letak: **< 992 px = mode HP/tablet** (menu geser, pemilih unit ringkas). Lihat `docs/UI_GUIDE.md`.
 - Keluar otomatis setelah 30 menit tanpa aktivitas, dengan peringatan 60 detik.
 - Versi: antd 6 (gunakan `title` pada Alert, `size` pada Drawer, `mask.closable` pada Modal), React Router 7, TypeScript 6.
+
+## 10. Catatan implementasi (Pack 5)
+
+- **Modul otomatis:** `features/<modul>/module.tsx` mengekspor `{ key, routes, nav? }`; router dan menu memuatnya otomatis (`app/modules.ts`). Lihat `docs/MODULE_GUIDE.md`.
+- **Cetak rapor:** isi rapor dirender sama persis untuk pratinjau dan cetak (`ReportPaperContent`). Saat mencetak, `PrintJob` memindahkan isi ke `#print-root`, memasang `@page { size; margin }` dinamis, lalu memanggil `window.print()`.
+  Margin efektif = margin template + offset kalibrasi (kiri/atas bertambah, kanan/bawah berkurang). Pengaturan tersimpan per template di `localStorage`.
+- **PDF:** pilih "Simpan sebagai PDF" di dialog cetak browser (ukuran kertas dan skala 100% harus sama dengan pengaturan). PDF dari server ditunda.
+- **Autosave rapor:** 1,2 detik setelah berhenti mengetik; perubahan yang tertunda dikirim saat meninggalkan halaman, menfinalkan, atau mencetak.
+- Pratinjau hanya memberi **perkiraan** batas halaman; hasil cetak final ditentukan browser dan printer.

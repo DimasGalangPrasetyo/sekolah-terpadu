@@ -15,18 +15,20 @@ import {
   UsersPage,
 } from './lazyPages'
 import { GuestOnly, RequireAuth, RequirePermission } from './guards'
+import { MODULES } from './modules'
 import { NAV_ITEMS } from './navigation'
 
 const planned: Record<string, string[]> = {
   staff: ['Data guru dan tenaga kependidikan', 'Penugasan ke unit', 'Penetapan wali kelas per rombel'],
   finance: ['Jenis biaya dan tarif per tingkat', 'Tagihan SPP dan pembayaran', 'Kwitansi dan kas', 'Laporan keuangan per unit'],
   inventory: ['Daftar aset dan lokasi', 'Kondisi dan perpindahan aset'],
-  reportcards: ['Form isian di kiri, pratinjau halaman di kanan', 'Pengaturan kertas dan kalibrasi cetak', 'Simpan sebagai PDF atau cetak langsung'],
   templates: ['Susunan rapor SD dan SMP', 'Ukuran kertas, margin, dan offset cetak'],
   reports: ['Laporan siswa, staf, keuangan, dan aset', 'Siap cetak dengan kop sekolah'],
 }
 
-const modulePages = NAV_ITEMS.filter((item) => item.key in planned).map((item) => ({
+const implemented = new Set(MODULES.map((m) => m.key))
+
+const modulePages = NAV_ITEMS.filter((item) => item.key in planned && !implemented.has(item.key)).map((item) => ({
   path: item.path.slice(1),
   element: (
     <RequirePermission permission={item.permission ?? []}>
@@ -43,6 +45,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardPage /> },
       ...modulePages,
+      ...MODULES.flatMap((m) => m.routes),
       { path: 'master', element: <RequirePermission permission="master.manage"><MasterPage /></RequirePermission> },
       { path: 'siswa', element: <RequirePermission permission="students.view"><StudentsPage /></RequirePermission> },
       { path: 'siswa/baru', element: <RequirePermission permission="students.manage"><StudentFormPage /></RequirePermission> },
