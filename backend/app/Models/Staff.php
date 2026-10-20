@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EmploymentStatus;
 use App\Enums\Gender;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -11,7 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Staff extends Model
 {
-    use SoftDeletes;
+    use Auditable, SoftDeletes;
+
+    /** Data pribadi tidak disalin ke audit log. */
+    protected array $auditExclude = ['address', 'phone', 'email', 'birth_date', 'birth_place', 'photo_path'];
 
     protected $fillable = [
         'nip',

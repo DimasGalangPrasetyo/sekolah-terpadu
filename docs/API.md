@@ -142,3 +142,41 @@ Rute modul baru dimuat otomatis dari `backend/routes/v1/*.php` (lihat `docs/MODU
 | POST | `/report-cards/{id}/unlock` | reportcards.unlock | Buka kunci `{reason}` (TU) |
 | POST | `/report-cards/{id}/printed` | policy `view` | Catat pencetakan ke audit log |
 | GET | `/report-cards/batch?classroom_id=` | idem | Semua rapor final satu rombel (cetak sekaligus) |
+
+## Pembaruan Pack 6 (Modul Staf)
+
+Rute modul staf dimuat otomatis dari `backend/routes/v1/staff.php`.
+
+| Method | Path | Izin | Keterangan |
+|---|---|---|---|
+| GET | `/staff?q=&is_teacher=&is_active=&unit=&employment_status=&page=&per_page=` | staff.view | Daftar staf terpaginasi (15/hlm). `q` mencari nama/NIP/NUPTK; `unit` kode unit penugasan |
+| GET | `/staff/{id}` | staff.view | Detail staf + penugasan unit + status akun pengguna + rombel perwalian aktif |
+| POST | `/staff` | staff.manage | Tambah staf baru beserta penugasan unit |
+| PUT | `/staff/{id}` | staff.manage | Ubah data staf dan sinkronisasi penugasan unit |
+| POST | `/staff/{id}/deactivate` | staff.manage | Nonaktifkan staf (ditolak 422 bila sedang menjadi wali kelas aktif) |
+| POST | `/staff/{id}/activate` | staff.manage | Aktifkan kembali staf |
+| DELETE | `/staff/{id}` | staff.manage | Soft delete (ditolak 409 bila punya akun, wali kelas, penanggung jawab aset, atau kepala unit) |
+
+## Pembaruan Pack 7 (Modul Inventaris)
+
+Rute modul inventaris dimuat otomatis dari `backend/routes/v1/inventory.php`.
+
+| Method | Path | Izin | Keterangan |
+|---|---|---|---|
+| GET | `/asset-categories` | inventory.view | Daftar semua kategori aset |
+| POST | `/asset-categories` | inventory.manage | Tambah kategori baru (`code` unik) |
+| PUT | `/asset-categories/{id}` | inventory.manage | Ubah data kategori |
+| DELETE | `/asset-categories/{id}` | inventory.manage | Hapus kategori (ditolak 409 bila sedang digunakan aset) |
+| GET | `/locations?unit=` | inventory.view | Daftar lokasi/ruang penempatan (`unit=shared` untuk fasilitas bersama) |
+| POST | `/locations` | inventory.manage | Tambah lokasi/ruang baru |
+| PUT | `/locations/{id}` | inventory.manage | Ubah data lokasi |
+| DELETE | `/locations/{id}` | inventory.manage | Hapus lokasi (ditolak 409 bila digunakan aset atau riwayat perpindahan) |
+| GET | `/assets?q=&unit=&category_id=&location_id=&item_condition=&status=&page=&per_page=` | inventory.view | Daftar aset terpaginasi (15/hlm). `q` mencari nama/kode; `unit=shared` untuk aset bersama |
+| GET | `/assets/{id}` | inventory.view | Detail aset lengkap beserta relasi dan riwayat perpindahan/kondisi |
+| POST | `/assets` | inventory.manage | Tambah aset baru (kode otomatis `AST-XXXX` bila dikosongkan) |
+| PUT | `/assets/{id}` | inventory.manage | Ubah data aset |
+| DELETE | `/assets/{id}` | inventory.manage | Hapus aset (soft delete) |
+| GET | `/assets/{id}/movements` | inventory.view | Daftar riwayat perpindahan lokasi, kondisi, atau penghapusan aset |
+| POST | `/assets/{id}/movements` | inventory.manage | Catat perpindahan lokasi (`move`), ubah kondisi (`condition`), atau penghapusan (`dispose`) |
+
+

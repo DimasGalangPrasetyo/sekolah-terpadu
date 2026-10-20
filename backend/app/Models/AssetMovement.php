@@ -4,11 +4,14 @@ namespace App\Models;
 
 use App\Enums\AssetCondition;
 use App\Enums\AssetMovementType;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AssetMovement extends Model
 {
+    use Auditable;
+
     protected $fillable = [
         'asset_id',
         'type',

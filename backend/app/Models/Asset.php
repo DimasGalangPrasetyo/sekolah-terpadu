@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\AssetCondition;
 use App\Enums\AssetStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Asset extends Model
 {
-    use SoftDeletes;
+    use Auditable, SoftDeletes;
+
+    protected array $auditExclude = ['photo_path'];
 
     protected $fillable = [
         'code',
