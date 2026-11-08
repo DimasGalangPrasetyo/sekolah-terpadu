@@ -3,6 +3,7 @@
 namespace Tests\Feature\Students;
 
 use App\Models\AcademicYear;
+use App\Models\AuditLog;
 use App\Models\Invoice;
 use App\Models\Student;
 use App\Models\StudentEnrollment;
@@ -270,7 +271,7 @@ class StudentTest extends TestCase
             'address' => 'Jl. Rahasia No. 1', 'phone' => '08123456789',
         ]))->assertCreated();
 
-        $log = \App\Models\AuditLog::where('event', 'created')->where('auditable_type', Student::class)->firstOrFail();
+        $log = AuditLog::where('event', 'created')->where('auditable_type', Student::class)->firstOrFail();
         $this->assertArrayHasKey('name', $log->new_values);
         $this->assertArrayNotHasKey('address', $log->new_values);
         $this->assertArrayNotHasKey('phone', $log->new_values);

@@ -38,7 +38,7 @@ class StudentDiscountRequest extends FormRequest
         ];
 
         if ($this->isMethod('POST')) {
-            $rules['student_id'] = ['required', 'integer', 'exists:students,id'];
+            $rules['student_id'] = ['required', 'integer', Rule::exists('students', 'id')->whereNull('deleted_at')];
             $rules['academic_year_id'] = ['required', 'integer', 'exists:academic_years,id'];
         } else {
             $rules['student_id'] = ['sometimes', 'integer', Rule::in([$discount?->student_id])];

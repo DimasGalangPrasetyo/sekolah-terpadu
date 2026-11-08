@@ -253,4 +253,61 @@ class StudentDiscountTest extends TestCase
             'value' => 60000,
         ])->assertStatus(403);
     }
+
+    public function test_per_page_maksimal_100(): void
+    {
+        $this->actingAs($this->tu)->getJson('/api/v1/student-discounts?per_page=1000')
+            ->assertOk()
+            ->assertJsonPath('meta.per_page', 100);
+    }
+
+    public function test_buat_diskon_untuk_siswa_soft_deleted_ditolak(): void
+    {
+        $student = $this->makeStudent();
+        $student->delete();
+
+        $this->actingAs($this->tu)->postJson('/api/v1/student-discounts', [
+            'student_id' => $student->id,
+            'academic_year_id' => $this->year->id,
+            'type' => 'fixed',
+            'value' => 50000,
+        ])->assertStatus(422)
+            ->assertJsonValidationErrors(['student_id']);
+    }
+
+    public function test_ubah_value_diskon_yang_jenis_biaya_nonaktif_berhasil(): void
+    {
+        $feeType = $this->makeFeeType(['is_active' => true]);
+        $discount = $this->makeDiscount([
+            'fee_type_id' => $feeType->id,
+            'value' => 20,
+        ]);
+
+        $feeType->update(['is_active' => false]);
+
+        $this->actingAs($this->tu)->putJson("/api/v1/student-discounts/{$discount->id}", [
+            'type' => 'percent',
+            'value' => 35,
+        ])->assertOk()
+            ->assertJsonPath('data.value', 35);
+
+        $this->assertSame(35, $discount->fresh()->value);
+    }
+
+    public function test_ganti_diskon_ke_jenis_biaya_nonaktif_ditolak(): void
+    {
+        $activeFeeType = $this->makeFeeType(['is_active' => true]);
+        $inactiveFeeType = $this->makeFeeType(['is_active' => false]);
+
+        $discount = $this->makeDiscount([
+            'fee_type_id' => $activeFeeType->id,
+            'value' => 20,
+        ]);
+
+        $this->actingAs($this->tu)->putJson("/api/v1/student-discounts/{$discount->id}", [
+            'fee_type_id' => $inactiveFeeType->id,
+            'type' => 'percent',
+            'value' => 20,
+        ])->assertStatus(422);
+    }
 }

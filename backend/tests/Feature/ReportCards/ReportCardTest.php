@@ -6,6 +6,7 @@ use App\Models\AcademicYear;
 use App\Models\AuditLog;
 use App\Models\Classroom;
 use App\Models\ReportCard;
+use App\Models\ReportTemplate;
 use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
@@ -63,7 +64,7 @@ class ReportCardTest extends TestCase
         $rows = $response->json('data.answers.subjects');
         $this->assertSame(['Matematika', 'Bahasa Indonesia'], array_column($rows, 'subject'));
         $this->assertSame('Bu Wali', $response->json('data.answers.signature.Wali Kelas'));
-        $this->assertTrue((bool) \App\Models\ReportTemplate::first()->is_locked, 'template terpakai harus terkunci');
+        $this->assertTrue((bool) ReportTemplate::first()->is_locked, 'template terpakai harus terkunci');
     }
 
     public function test_membuka_dua_kali_mengembalikan_rapor_yang_sama(): void
@@ -87,7 +88,7 @@ class ReportCardTest extends TestCase
 
     public function test_tanpa_template_aktif_ditolak(): void
     {
-        \App\Models\ReportTemplate::query()->update(['is_active' => false]);
+        ReportTemplate::query()->update(['is_active' => false]);
 
         $this->openCard($this->tu)->assertStatus(422)->assertJsonValidationErrors('student_id');
     }

@@ -129,7 +129,7 @@ class ReportCardService
      * Memeriksa isian terhadap definisi template: kunci asing ditolak, tipe dan panjang dibatasi.
      *
      * @param  array<string, mixed>  $data
-     * @return array<string, mixed>  data yang sudah dinormalkan
+     * @return array<string, mixed> data yang sudah dinormalkan
      */
     public function validateData(array $data, array $definition): array
     {
@@ -161,6 +161,7 @@ class ReportCardService
                     foreach (array_values($value) as $i => $row) {
                         if (! is_array($row)) {
                             $errors["data.$key.$i"] = ['Baris tidak valid.'];
+
                             continue;
                         }
                         $clean_row = [];

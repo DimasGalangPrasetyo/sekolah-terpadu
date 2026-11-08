@@ -35,7 +35,7 @@ class StudentDiscountController extends Controller
             })
             ->latest('id');
 
-        $discounts = $query->paginate((int) $request->query('per_page', 15));
+        $discounts = $query->paginate(min((int) $request->query('per_page', 15), 100));
 
         return StudentDiscountResource::collection($discounts);
     }
@@ -75,7 +75,7 @@ class StudentDiscountController extends Controller
 
         $feeTypeId = array_key_exists('fee_type_id', $data) ? $data['fee_type_id'] : $studentDiscount->fee_type_id;
 
-        if (! empty($feeTypeId)) {
+        if (! empty($feeTypeId) && $feeTypeId !== $studentDiscount->fee_type_id) {
             $feeType = FeeType::findOrFail($feeTypeId);
             if (! $feeType->is_active) {
                 abort(422, 'Jenis biaya yang dipilih sudah nonaktif. Pilih jenis biaya yang aktif.');
