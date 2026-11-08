@@ -17,6 +17,7 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | A-08 | Berjalan | 2026-10-14 | main | Pack 5: workspace rapor (form + pratinjau + cetak), profil sekolah, titik perluasan modul |
 | A-07 | Selesai | 2026-10-20 | task/A-07-staff | Modul staf: CRUD, penugasan unit, aktivasi/deaktivasi, UI lengkap |
 | A-09 | Selesai | 2026-10-20 | task/A-09-inventory | Modul inventaris: kategori, lokasi, aset, riwayat perpindahan/kondisi, UI lengkap |
+| K-1 | Selesai | 2026-10-31 | task/K-1-finance-setup | Jenis biaya, tarif, diskon siswa |
 
 (Status: Belum, Berjalan, Berhenti, Selesai)
 

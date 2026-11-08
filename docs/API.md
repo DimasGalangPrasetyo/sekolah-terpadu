@@ -76,7 +76,19 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 ## Keuangan (TU tulis; SA baca)
 | Method | Path | Fungsi | Fase |
 |---|---|---|---|
-| CRUD | `/fee-types`, `/fee-rates`, `/student-discounts` | Biaya, tarif, potongan | D |
+| GET | `/fee-types?is_active=` | Daftar jenis biaya (tanpa paginasi, urut nama) | D |
+| POST | `/fee-types` | Tambah jenis biaya baru | D |
+| PUT | `/fee-types/{id}` | Ubah nama & kategori (kode tidak dapat diubah) | D |
+| POST | `/fee-types/{id}/deactivate`, `/activate` | Nonaktif/aktifkan jenis biaya | D |
+| DELETE | `/fee-types/{id}` | Hapus jenis biaya (409 bila dipakai) | D |
+| GET | `/fee-rates?academic_year_id=&unit=&fee_type_id=&grade_level_id=` | Daftar tarif (tanpa paginasi, default TA aktif) | D |
+| POST | `/fee-rates` | Tambah tarif | D |
+| PUT | `/fee-rates/{id}` | Ubah nominal tarif | D |
+| DELETE | `/fee-rates/{id}` | Hapus tarif | D |
+| GET | `/student-discounts?q=&academic_year_id=&fee_type_id=&is_active=&page=&per_page=` | Daftar diskon siswa (paginasi 15) | D |
+| POST | `/student-discounts` | Tambah diskon siswa | D |
+| PUT | `/student-discounts/{id}` | Ubah diskon siswa (siswa & TA tetap) | D |
+| POST | `/student-discounts/{id}/deactivate`, `/activate` | Nonaktif/aktifkan diskon siswa | D |
 | POST | `/invoices/generate` | Generate tagihan massal (idempoten) | D |
 | GET/POST | `/invoices` | Daftar (filter unit, status, periode, siswa) / manual | D |
 | GET | `/invoices/{id}` | Detail | D |

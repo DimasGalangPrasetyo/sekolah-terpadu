@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use App\Enums\DiscountType;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StudentDiscount extends Model
 {
+    use Auditable;
+
+    /** Kondisi ekonomi keluarga tidak disalin ke audit log. */
+    protected array $auditExclude = ['reason'];
+
     protected $fillable = [
         'student_id',
         'fee_type_id',
