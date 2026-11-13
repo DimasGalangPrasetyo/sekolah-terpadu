@@ -5,6 +5,11 @@ import type {
   FeeRatePayload,
   FeeType,
   FeeTypePayload,
+  GenerateInvoicesPayload,
+  GenerateResult,
+  Invoice,
+  InvoiceCreatePayload,
+  InvoiceListParams,
   StudentDiscount,
   StudentDiscountParams,
   StudentDiscountPayload,
@@ -94,5 +99,32 @@ export async function deactivateStudentDiscount(id: number): Promise<StudentDisc
 
 export async function activateStudentDiscount(id: number): Promise<StudentDiscount> {
   const { data } = await http.post<{ data: StudentDiscount }>(`/student-discounts/${id}/activate`)
+  return data.data
+}
+
+// --- Tagihan ---
+
+export async function listInvoices(params?: InvoiceListParams): Promise<Paginated<Invoice>> {
+  const { data } = await http.get<Paginated<Invoice>>('/invoices', { params })
+  return data
+}
+
+export async function getInvoice(id: number): Promise<Invoice> {
+  const { data } = await http.get<{ data: Invoice }>(`/invoices/${id}`)
+  return data.data
+}
+
+export async function generateInvoices(payload: GenerateInvoicesPayload): Promise<GenerateResult> {
+  const { data } = await http.post<{ data: GenerateResult }>('/invoices/generate', payload)
+  return data.data
+}
+
+export async function createInvoice(payload: InvoiceCreatePayload): Promise<Invoice> {
+  const { data } = await http.post<{ data: Invoice }>('/invoices', payload)
+  return data.data
+}
+
+export async function voidInvoice(id: number, reason: string): Promise<Invoice> {
+  const { data } = await http.post<{ data: Invoice }>(`/invoices/${id}/void`, { reason })
   return data.data
 }

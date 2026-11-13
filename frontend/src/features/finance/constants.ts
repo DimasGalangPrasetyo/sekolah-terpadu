@@ -1,4 +1,4 @@
-import type { DiscountType, FeeCategory } from './types'
+import type { DiscountType, FeeCategory, InvoiceKind, InvoiceStatus } from './types'
 
 export const FEE_CATEGORY_LABELS: Record<FeeCategory, string> = {
   monthly: 'Bulanan',
@@ -17,4 +17,23 @@ export const FEE_CATEGORY_COLORS: Record<FeeCategory, string> = {
 export const DISCOUNT_TYPE_LABELS: Record<DiscountType, string> = {
   fixed: 'Nominal Tetap (Rp)',
   percent: 'Persentase (%)',
+}
+
+export const INVOICE_STATUS_LABELS: Record<InvoiceStatus, string> = {
+  unpaid: 'Belum Bayar',
+  partial: 'Sebagian',
+  paid: 'Lunas',
+  void: 'Dibatalkan',
+}
+
+export const INVOICE_STATUS_COLORS: Record<InvoiceStatus, string> = {
+  unpaid: 'orange',
+  partial: 'blue',
+  paid: 'success',
+  void: 'default',
+}
+
+export const INVOICE_KIND_LABELS: Record<InvoiceKind, string> = {
+  monthly: 'Bulanan',
+  one_time: 'Sekali Bayar',
 }

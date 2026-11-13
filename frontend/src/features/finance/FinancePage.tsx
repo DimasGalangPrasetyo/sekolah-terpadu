@@ -12,7 +12,7 @@ export function FinancePage() {
 
       <Card styles={{ body: { padding: 16 } }}>
         <Tabs
-          defaultActiveKey="rates"
+          defaultActiveKey="invoices"
           items={FINANCE_TABS.map((tab) => ({
             key: tab.key,
             label: tab.label,
