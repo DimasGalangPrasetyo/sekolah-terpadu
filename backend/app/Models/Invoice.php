@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Enums\InvoiceKind;
 use App\Enums\InvoiceStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Invoice extends Model
 {
+    use Auditable;
+
     protected $fillable = [
         'number',
         'student_id',
@@ -17,6 +20,7 @@ class Invoice extends Model
         'academic_year_id',
         'kind',
         'period_month',
+        'active_period',
         'due_date',
         'total_amount',
         'paid_amount',
@@ -26,7 +30,6 @@ class Invoice extends Model
         'voided_at',
         'voided_by',
         'void_reason',
-        'period_month',
     ];
 
     protected function casts(): array
@@ -34,7 +37,10 @@ class Invoice extends Model
         return [
             'kind' => InvoiceKind::class,
             'period_month' => 'date',
+            'active_period' => 'date',
             'due_date' => 'date',
+            'total_amount' => 'integer',
+            'paid_amount' => 'integer',
             'status' => InvoiceStatus::class,
             'voided_at' => 'datetime',
         ];
