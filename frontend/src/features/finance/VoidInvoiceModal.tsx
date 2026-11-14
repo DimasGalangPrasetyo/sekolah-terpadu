@@ -1,7 +1,7 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { Alert, Form, Input, Modal } from 'antd'
 import { useState } from 'react'
-import { getErrorMessage, getStatus } from '../../api/errors'
+import { getErrorMessage } from '../../api/errors'
 import { voidInvoice } from './api'
 import type { Invoice } from './types'
 
@@ -39,11 +39,7 @@ export function VoidInvoiceModal({ open, invoice, onClose, onSuccess }: Props) {
       onSuccess()
       handleClose()
     } catch (err: unknown) {
-      if (getStatus(err) === 409) {
-        setConflictMsg(getErrorMessage(err))
-      } else {
-        setConflictMsg(getErrorMessage(err))
-      }
+      setConflictMsg(getErrorMessage(err))
     } finally {
       setLoading(false)
     }

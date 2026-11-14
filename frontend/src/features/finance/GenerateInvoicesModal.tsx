@@ -15,6 +15,7 @@ import {
 import dayjs from 'dayjs'
 import { useCallback, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { getErrorMessage } from '../../api/errors'
 import { listAcademicYears, listUnits } from '../../api/master'
 import { formatRupiah } from '../../lib/format'
 import { useUiStore } from '../../stores/ui'
@@ -95,7 +96,7 @@ function GenerateInvoicesForm({
       setLastPreviewValues(values)
       setPreviewStale(false)
     } catch (err: unknown) {
-      setPreviewError(err instanceof Error ? err.message : 'Gagal memuat pratinjau')
+      setPreviewError(getErrorMessage(err, 'Gagal memuat pratinjau'))
     } finally {
       setPreviewLoading(false)
     }
@@ -112,7 +113,7 @@ function GenerateInvoicesForm({
       onSuccess()
       onClose()
     } catch (err: unknown) {
-      message.error(err instanceof Error ? err.message : 'Gagal menerbitkan tagihan')
+      message.error(getErrorMessage(err, 'Gagal menerbitkan tagihan'))
     } finally {
       setPublishLoading(false)
     }
