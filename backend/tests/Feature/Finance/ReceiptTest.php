@@ -25,7 +25,8 @@ class ReceiptTest extends TestCase
 
     public function test_data_kwitansi_lengkap_dan_dicatat_di_audit(): void
     {
-        SchoolProfile::create(['foundation_name' => "Yayasan Al-Mu'min", 'address' => 'Jl. Contoh No. 1']);
+        SchoolProfile::firstOrCreate([], ['foundation_name' => 'Nama Yayasan'])
+            ->update(['foundation_name' => "Yayasan Al-Mu'min", 'address' => 'Jl. Contoh No. 1']);
         $andi = $this->sdStudent('Andi');
         $invoice = $this->sppInvoice($andi, '2026-10');
         $id = $this->payInvoice($invoice, 300000, ['payment_date' => '2026-10-05'])->assertCreated()->json('data.id');
@@ -63,6 +64,7 @@ class ReceiptTest extends TestCase
 
     public function test_nama_yayasan_bawaan_bila_profil_belum_diisi(): void
     {
+        SchoolProfile::query()->delete();
         $andi = $this->sdStudent('Andi');
         $id = $this->payInvoice($this->sppInvoice($andi, '2026-10'), 100000)->assertCreated()->json('data.id');
 
