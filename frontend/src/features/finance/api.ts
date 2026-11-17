@@ -10,6 +10,10 @@ import type {
   Invoice,
   InvoiceCreatePayload,
   InvoiceListParams,
+  Payment,
+  PaymentCreatePayload,
+  PaymentListParams,
+  Receipt,
   StudentDiscount,
   StudentDiscountParams,
   StudentDiscountPayload,
@@ -126,5 +130,39 @@ export async function createInvoice(payload: InvoiceCreatePayload): Promise<Invo
 
 export async function voidInvoice(id: number, reason: string): Promise<Invoice> {
   const { data } = await http.post<{ data: Invoice }>(`/invoices/${id}/void`, { reason })
+  return data.data
+}
+
+// --- Pembayaran ---
+
+export async function listPayments(params?: PaymentListParams): Promise<Paginated<Payment>> {
+  const { data } = await http.get<Paginated<Payment>>('/payments', { params })
+  return data
+}
+
+export async function getPayment(id: number): Promise<Payment> {
+  const { data } = await http.get<{ data: Payment }>(`/payments/${id}`)
+  return data.data
+}
+
+export async function listOpenInvoices(studentId: number): Promise<Invoice[]> {
+  const { data } = await http.get<{ data: Invoice[] }>('/payments/open-invoices', {
+    params: { student_id: studentId },
+  })
+  return data.data
+}
+
+export async function createPayment(payload: PaymentCreatePayload): Promise<Payment> {
+  const { data } = await http.post<{ data: Payment }>('/payments', payload)
+  return data.data
+}
+
+export async function voidPayment(id: number, reason: string): Promise<Payment> {
+  const { data } = await http.post<{ data: Payment }>(`/payments/${id}/void`, { reason })
+  return data.data
+}
+
+export async function getReceipt(id: number): Promise<Receipt> {
+  const { data } = await http.get<{ data: Receipt }>(`/payments/${id}/receipt`)
   return data.data
 }

@@ -19,9 +19,16 @@ interface Props {
   invoiceId: number | null
   onClose: () => void
   onVoidSuccess: () => void
+  onPay?: (student: { id: number; nis: string | null; name: string }, invoiceId: number) => void
 }
 
-export function InvoiceDetailDrawer({ open, invoiceId, onClose, onVoidSuccess }: Props) {
+export function InvoiceDetailDrawer({
+  open,
+  invoiceId,
+  onClose,
+  onVoidSuccess,
+  onPay,
+}: Props) {
   const { data: me } = useMe()
   const canManage = can(me, 'finance.manage')
   const [voidOpen, setVoidOpen] = useState(false)
@@ -227,11 +234,33 @@ export function InvoiceDetailDrawer({ open, invoiceId, onClose, onVoidSuccess }:
         <Typography.Text type="secondary">Belum ada pembayaran</Typography.Text>
       )}
 
-      {inv.status !== 'void' && canManage && (
-        <div style={{ marginTop: 16, textAlign: 'right' }}>
-          <Button danger onClick={() => setVoidOpen(true)}>
-            Batalkan Tagihan
-          </Button>
+      {canManage && (
+        <div
+          style={{
+            marginTop: 16,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: 8,
+            alignItems: 'center',
+          }}
+        >
+          {inv.student && (inv.status === 'unpaid' || inv.status === 'partial') && (
+            <Button
+              type="primary"
+              onClick={() => {
+                if (inv.student) {
+                  onPay?.(inv.student, inv.id)
+                }
+              }}
+            >
+              Bayar
+            </Button>
+          )}
+          {inv.status !== 'void' && (
+            <Button danger onClick={() => setVoidOpen(true)}>
+              Batalkan Tagihan
+            </Button>
+          )}
         </div>
       )}
 

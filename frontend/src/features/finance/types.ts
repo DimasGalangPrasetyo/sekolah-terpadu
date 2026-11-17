@@ -178,3 +178,94 @@ export interface InvoiceListParams {
   page?: number
   per_page?: number
 }
+
+// --- Pembayaran ---
+
+export type PaymentMethod = 'cash' | 'transfer' | 'other'
+export type PaymentStatus = 'valid' | 'void'
+
+export interface PaymentAllocation {
+  id: number
+  amount: number
+  invoice: {
+    id: number
+    number: string
+    kind: 'monthly' | 'one_time'
+    period_month: string | null
+    status: InvoiceStatus
+  } | null
+}
+
+export interface Payment {
+  id: number
+  receipt_number: string
+  payment_date: string // 'YYYY-MM-DD'
+  method: PaymentMethod
+  amount: number
+  reference: string | null
+  notes: string | null
+  status: PaymentStatus
+  voided_at: string | null
+  void_reason: string | null
+  created_at: string
+  student?: { id: number; nis: string | null; name: string } | null
+  received_by?: { id: number; name: string } | null
+  allocations?: PaymentAllocation[]
+}
+
+export interface ReceiptAllocation {
+  invoice_number: string | null
+  unit: string | null
+  description: string | null
+  amount: number
+}
+
+export interface ReceiptSchool {
+  name: string
+  address: string | null
+  phone: string | null
+  email: string | null
+}
+
+export interface Receipt {
+  receipt_number: string
+  payment_date: string
+  method: PaymentMethod
+  method_label: string
+  reference: string | null
+  notes: string | null
+  amount: number
+  amount_in_words: string
+  status: PaymentStatus
+  voided_at: string | null
+  void_reason: string | null
+  student: { nis: string | null; name: string } | null
+  received_by: string | null
+  allocations: ReceiptAllocation[]
+  school: ReceiptSchool
+  printed_at: string
+}
+
+export interface PaymentListParams {
+  q?: string
+  student_id?: number
+  method?: PaymentMethod
+  status?: PaymentStatus
+  date_from?: string // YYYY-MM-DD
+  date_to?: string // YYYY-MM-DD
+  page?: number
+  per_page?: number
+}
+
+export interface PaymentCreatePayload {
+  student_id: number
+  payment_date: string // YYYY-MM-DD
+  method: PaymentMethod
+  reference?: string | null
+  notes?: string | null
+  amount?: number
+  allocations?: {
+    invoice_id: number
+    amount: number
+  }[]
+}

@@ -32,6 +32,7 @@ import type { Invoice, InvoiceKind, InvoiceStatus } from './types'
 import { GenerateInvoicesModal } from './GenerateInvoicesModal'
 import { InvoiceCreateDrawer } from './InvoiceCreateDrawer'
 import { InvoiceDetailDrawer } from './InvoiceDetailDrawer'
+import { PaymentCreateDrawer } from './PaymentCreateDrawer'
 
 function debounce<Args extends unknown[]>(fn: (...args: Args) => void, delay: number) {
   let timer: ReturnType<typeof setTimeout> | undefined
@@ -63,6 +64,18 @@ export function InvoiceTab() {
   const [generateOpen, setGenerateOpen] = useState(false)
   const [createOpen, setCreateOpen] = useState(false)
   const [selectedInvoiceId, setSelectedInvoiceId] = useState<number | null>(null)
+  const [payDrawerOpen, setPayDrawerOpen] = useState(false)
+  const [payStudent, setPayStudent] = useState<{ id: number; nis: string | null; name: string } | null>(null)
+  const [payInvoiceId, setPayInvoiceId] = useState<number | undefined>(undefined)
+
+  const handlePay = (
+    student: { id: number; nis: string | null; name: string },
+    invoiceId: number,
+  ) => {
+    setPayStudent(student)
+    setPayInvoiceId(invoiceId)
+    setPayDrawerOpen(true)
+  }
 
   const { data: academicYears = [] } = useQuery({
     queryKey: ['academic-years'],
@@ -372,6 +385,24 @@ export function InvoiceTab() {
         invoiceId={selectedInvoiceId}
         onClose={() => setSelectedInvoiceId(null)}
         onVoidSuccess={invalidate}
+        onPay={handlePay}
+      />
+
+      <PaymentCreateDrawer
+        open={payDrawerOpen}
+        initialStudent={payStudent}
+        initialInvoiceId={payInvoiceId}
+        onClose={() => {
+          setPayDrawerOpen(false)
+          setPayStudent(null)
+          setPayInvoiceId(undefined)
+        }}
+        onSuccess={() => {
+          invalidate()
+          if (selectedInvoiceId !== null) {
+            void queryClient.invalidateQueries({ queryKey: ['invoice', selectedInvoiceId] })
+          }
+        }}
       />
     </div>
   )
