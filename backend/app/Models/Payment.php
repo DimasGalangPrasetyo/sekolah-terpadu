@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Enums\PaymentMethod;
 use App\Enums\RecordStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Payment extends Model
 {
+    use Auditable;
+
     protected $fillable = [
         'receipt_number',
         'student_id',
@@ -30,6 +33,7 @@ class Payment extends Model
         return [
             'payment_date' => 'date',
             'method' => PaymentMethod::class,
+            'amount' => 'integer',
             'status' => RecordStatus::class,
             'voided_at' => 'datetime',
         ];
