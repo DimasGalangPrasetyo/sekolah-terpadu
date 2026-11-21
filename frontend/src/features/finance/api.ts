@@ -1,6 +1,13 @@
 import { http } from '../../api/client'
 import type { Paginated } from '../../types/api'
 import type {
+  CashCategory,
+  CashCategoryPayload,
+  CashSummary,
+  CashTransaction,
+  CashTransactionCreatePayload,
+  CashTransactionListParams,
+  CashType,
   FeeRate,
   FeeRatePayload,
   FeeType,
@@ -166,3 +173,76 @@ export async function getReceipt(id: number): Promise<Receipt> {
   const { data } = await http.get<{ data: Receipt }>(`/payments/${id}/receipt`)
   return data.data
 }
+
+// --- Kategori Kas ---
+
+export async function listCashCategories(params?: {
+  type?: CashType
+  is_active?: boolean | number
+}): Promise<CashCategory[]> {
+  const queryParams: Record<string, unknown> = {}
+  if (params?.type) queryParams.type = params.type
+  if (params?.is_active !== undefined) {
+    queryParams.is_active = typeof params.is_active === 'boolean' ? (params.is_active ? 1 : 0) : params.is_active
+  }
+  const { data } = await http.get<{ data: CashCategory[] }>('/cash-categories', { params: queryParams })
+  return data.data
+}
+
+export async function createCashCategory(payload: CashCategoryPayload): Promise<CashCategory> {
+  const { data } = await http.post<{ data: CashCategory }>('/cash-categories', payload)
+  return data.data
+}
+
+export async function updateCashCategory(id: number, payload: { name: string }): Promise<CashCategory> {
+  const { data } = await http.put<{ data: CashCategory }>(`/cash-categories/${id}`, payload)
+  return data.data
+}
+
+export async function deactivateCashCategory(id: number): Promise<CashCategory> {
+  const { data } = await http.post<{ data: CashCategory }>(`/cash-categories/${id}/deactivate`)
+  return data.data
+}
+
+export async function activateCashCategory(id: number): Promise<CashCategory> {
+  const { data } = await http.post<{ data: CashCategory }>(`/cash-categories/${id}/activate`)
+  return data.data
+}
+
+export async function deleteCashCategory(id: number): Promise<void> {
+  await http.delete(`/cash-categories/${id}`)
+}
+
+// --- Transaksi Kas ---
+
+export async function listCashTransactions(
+  params?: CashTransactionListParams,
+): Promise<Paginated<CashTransaction>> {
+  const { data } = await http.get<Paginated<CashTransaction>>('/cash-transactions', { params })
+  return data
+}
+
+export async function getCashSummary(
+  params?: Omit<CashTransactionListParams, 'page' | 'per_page'>,
+): Promise<CashSummary> {
+  const { data } = await http.get<{ data: CashSummary }>('/cash-transactions/summary', { params })
+  return data.data
+}
+
+export async function getCashTransaction(id: number): Promise<CashTransaction> {
+  const { data } = await http.get<{ data: CashTransaction }>(`/cash-transactions/${id}`)
+  return data.data
+}
+
+export async function createCashTransaction(
+  payload: CashTransactionCreatePayload,
+): Promise<CashTransaction> {
+  const { data } = await http.post<{ data: CashTransaction }>('/cash-transactions', payload)
+  return data.data
+}
+
+export async function voidCashTransaction(id: number, reason: string): Promise<CashTransaction> {
+  const { data } = await http.post<{ data: CashTransaction }>(`/cash-transactions/${id}/void`, { reason })
+  return data.data
+}
+

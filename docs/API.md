@@ -97,9 +97,16 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 | GET/POST | `/payments` | Daftar / catat (alokasi otomatis/manual) | D |
 | GET | `/payments/{id}`, `/payments/{id}/receipt` | Detail / data kwitansi | D |
 | POST | `/payments/{id}/void` | Void (alasan) | D |
-| CRUD | `/cash-categories` | Kategori kas | D |
-| GET/POST | `/cash-transactions` | Daftar / catat | D |
-| POST | `/cash-transactions/{id}/void` | Void (alasan) | D |
+| GET | `/cash-categories?type=&is_active=` | Daftar kategori kas (tanpa paginasi, urut type lalu name) | D |
+| POST | `/cash-categories` | Buat kategori kas (`{ name, type }`; aktif) | D |
+| PUT | `/cash-categories/{id}` | Ubah nama kategori (type tidak bisa diubah → 422) | D |
+| POST | `/cash-categories/{id}/deactivate`, `/activate` | Nonaktif/aktifkan kategori | D |
+| DELETE | `/cash-categories/{id}` | Hapus kategori (409 bila punya transaksi) | D |
+| GET | `/cash-transactions?type=&cash_category_id=&unit=&status=&date_from=&date_to=&q=&page=&per_page=` | Daftar transaksi kas (paginasi 15, maks 100; `unit`=kode/`none`) | D |
+| GET | `/cash-transactions/summary` | Ringkasan kas (`{ income, expense, balance, count }`, valid saja) | D |
+| GET | `/cash-transactions/{id}` | Detail transaksi kas | D |
+| POST | `/cash-transactions` | Catat transaksi kas (`{ transaction_date, cash_category_id, unit_id?, amount, description }`) | D |
+| POST | `/cash-transactions/{id}/void` | Void transaksi kas (`{ reason }` min 5, maks 255; 409 bila sudah void) | D |
 
 ## Inventaris (TU tulis; SA baca)
 | Method | Path | Fungsi | Fase |

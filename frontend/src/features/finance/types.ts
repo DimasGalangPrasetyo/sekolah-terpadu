@@ -269,3 +269,65 @@ export interface PaymentCreatePayload {
     amount: number
   }[]
 }
+
+// --- Kas Masuk / Keluar & Kategori Kas ---
+
+export type CashType = 'income' | 'expense'
+export type CashStatus = 'valid' | 'void'
+
+export interface CashCategory {
+  id: number
+  name: string
+  type: CashType
+  is_active: boolean
+}
+
+export interface CashCategoryPayload {
+  name: string
+  type?: CashType
+}
+
+export interface CashTransaction {
+  id: number
+  number: string
+  transaction_date: string
+  type: CashType
+  amount: number
+  description: string
+  status: CashStatus
+  voided_at: string | null
+  void_reason: string | null
+  created_at: string
+  category?: { id: number; name: string; type: CashType } | null
+  unit?: { id: number; code: string; name: string } | null
+  created_by?: { id: number; name: string } | null
+  voided_by?: { id: number; name: string } | null
+}
+
+export interface CashSummary {
+  income: number
+  expense: number
+  balance: number
+  count: number
+}
+
+export interface CashTransactionListParams {
+  type?: CashType
+  cash_category_id?: number
+  unit?: string
+  status?: CashStatus
+  date_from?: string
+  date_to?: string
+  q?: string
+  page?: number
+  per_page?: number
+}
+
+export interface CashTransactionCreatePayload {
+  transaction_date: string
+  cash_category_id: number
+  unit_id?: number | null
+  amount: number
+  description: string
+}
+

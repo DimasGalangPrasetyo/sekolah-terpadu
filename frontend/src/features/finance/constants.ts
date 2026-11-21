@@ -1,4 +1,6 @@
 import type {
+  CashStatus,
+  CashType,
   DiscountType,
   FeeCategory,
   InvoiceKind,
@@ -81,3 +83,26 @@ export const RECEIPT_PAGE: import('../reportcards/printSettings').EffectivePage 
   fontFamily: 'Arial, Helvetica, sans-serif',
   fontSizePt: 9,
 }
+
+// --- Kas Masuk / Keluar & Kategori Kas ---
+
+export const CASH_TYPE_LABELS: Record<CashType, string> = {
+  income: 'Pemasukan',
+  expense: 'Pengeluaran',
+}
+
+export const CASH_TYPE_COLORS: Record<CashType, string> = {
+  income: 'green',
+  expense: 'red',
+}
+
+export const CASH_STATUS_LABELS: Record<CashStatus, string> = {
+  valid: 'Valid',
+  void: 'Dibatalkan',
+}
+
+export const CASH_STATUS_COLORS: Record<CashStatus, string> = {
+  valid: 'success',
+  void: 'default',
+}
+

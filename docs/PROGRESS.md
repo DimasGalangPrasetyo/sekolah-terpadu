@@ -20,6 +20,7 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | K-1 | Selesai | 2026-10-31 | task/K-1-finance-setup | Jenis biaya, tarif, diskon siswa |
 | K-2 frontend | Selesai | 2026-11-13 | main | Tab Tagihan |
 | K-3 frontend | Selesai | 2026-11-17 | Antigravity | Tab Pembayaran, kwitansi |
+| K-4 | Selesai | 2026-11-21 | Antigravity | Kas masuk/keluar dan kategori kas |
 
 (Status: Belum, Berjalan, Berhenti, Selesai)
 

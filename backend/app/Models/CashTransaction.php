@@ -4,11 +4,14 @@ namespace App\Models;
 
 use App\Enums\CashType;
 use App\Enums\RecordStatus;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CashTransaction extends Model
 {
+    use Auditable;
+
     protected $fillable = [
         'number',
         'transaction_date',
