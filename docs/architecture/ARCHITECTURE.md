@@ -8,13 +8,13 @@
 | K-02 | Tiga unit (TK, SD, SMP) sebagai dimensi data (`unit_id`) |
 | K-03 | Modul penilaian ditiadakan; rapor lewat workspace isian, hanya SD dan SMP |
 | K-04 | Stack: Laravel + React/Vite + MySQL |
-| K-05 | Metode: prototype; asumsi dicatat di `ASSUMPTIONS.md` |
+| K-05 | Metode: prototype; asumsi dicatat di `docs/product/ASSUMPTIONS.md` |
 | K-06 | Pembagian kerja (minggu demo): Claude = PM, arsitek, reviewer, dan penulis kode kompleks di chat; OpenCode (DeepSeek V4 Flash Free, cadangan MiniMax M3 Free) = setup, kode, tes, commit; Antigravity = ditunda (kuota habis) |
 | K-07 | TU dan keuangan terpusat lintas TK/SD/SMP (satu peran admin TU & keuangan) |
 | K-08 | Demo memakai template rapor generik yang data-driven; template asli menyusul setelah demo |
 | K-09 | Tiga peran (superadmin, admin_tu_keuangan, guru); tanpa peran hanya-lihat; akun dibuat superadmin, satu per orang. **Wali kelas = penugasan guru, bukan peran** |
-| K-10 | Rapor: ukuran kertas bagian dari template; opsi cetak dan PDF (lihat `DECISIONS.md` §3) |
-| K-11 | Rancangan lengkap per topik: `DECISIONS.md`, `DATABASE.md`, `BACKEND.md`, `API.md`, `FRONTEND.md`, `SECURITY.md`, `DEPLOYMENT.md`, `WORKFLOW.md` |
+| K-10 | Rapor: ukuran kertas bagian dari template; opsi cetak dan PDF (lihat `docs/architecture/DECISIONS.md` §3) |
+| K-11 | Rancangan lengkap per topik: `docs/architecture/DECISIONS.md`, `docs/architecture/DATABASE.md`, `docs/architecture/BACKEND.md`, `docs/architecture/API.md`, `docs/architecture/FRONTEND.md`, `docs/architecture/SECURITY.md`, `docs/architecture/DEPLOYMENT.md`, `docs/process/WORKFLOW.md` |
 
 ## Usulan (dikunci setelah disetujui di Sprint 0)
 

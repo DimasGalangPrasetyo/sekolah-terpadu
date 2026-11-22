@@ -1,6 +1,6 @@
 # KARTU: modul Staf
 
-**Pelaksana:** Antigravity · **Commit:** `feat(staff): modul staf` · **Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/DATABASE.md` §3
+**Pelaksana:** Antigravity · **Commit:** `feat(staff): modul staf` · **Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/DATABASE.md` §3
 
 ## Tujuan
 TU dapat mengelola data guru dan tenaga kependidikan: daftar, tambah, ubah, nonaktifkan, hapus, dan penugasan ke unit (TK/SD/SMP).
@@ -11,7 +11,7 @@ Tabel `staff` dan `staff_unit_assignments` serta modelnya **sudah ada**. Jangan 
   `app/Http/Resources/StaffResource.php`, `app/Services/StaffService.php`, `tests/Feature/Staff/StaffTest.php`
 - Backend ubah (hanya menambah trait `Auditable` + `$auditExclude`): `app/Models/Staff.php`, `app/Models/StaffUnitAssignment.php`
 - Frontend baru: `frontend/src/features/staff/` (`module.tsx`, `lazyPages.tsx`, `api.ts`, `types.ts`, `StaffPage.tsx`, `StaffDrawer.tsx`)
-- Dokumen: tambahkan bagian di `docs/API.md` dan satu baris di `docs/PROGRESS.md`
+- Dokumen: tambahkan bagian di `docs/architecture/API.md` dan satu baris di `docs/process/PROGRESS.md`
 
 ## API (izin: `staff.view` untuk baca, `staff.manage` untuk tulis)
 | Method | Path | Keterangan |
@@ -46,7 +46,7 @@ nonaktif ditolak untuk wali kelas · `has_account` dan `homerooms` benar · guru
 - `StaffPage`: bilah judul + tombol "Tambah staf" (hanya bila `staff.manage`), filter (cari, guru/non-guru, status, **unit mengikuti pemilih unit di bilah atas** lewat `useUiStore`),
   tabel server-side (nama + NIP di bawahnya, jabatan, unit sebagai Tag, status kepegawaian [md], Guru [lg], wali kelas [md], akun [lg], status), menu aksi (Ubah, Nonaktifkan/Aktifkan, Hapus dengan konfirmasi).
 - `StaffDrawer`: formulir `Drawer` (pola `features/users/UserFormDrawer.tsx`) dengan `Form.List` untuk penugasan unit. Galat 422/409 tampil di kolom/Alert.
-- Responsif sesuai `docs/UI_GUIDE.md` (uji 375/768/1280), semua teks Indonesia.
+- Responsif sesuai `docs/guides/UI_GUIDE.md` (uji 375/768/1280), semua teks Indonesia.
 
 ## Selesai bila
 `php artisan test` semua lulus · `php vendor/bin/pint --test` bersih · `npm run lint` dan `npm run build` lulus · halaman `/staf` teruji manual sebagai `tu` dan `guru1` (guru melihat 403).

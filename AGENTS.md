@@ -7,7 +7,7 @@ Berlaku untuk OpenCode dan Antigravity. Baca file ini di awal setiap tugas.
 Sistem administrasi dan operasional untuk satu yayasan (unit TK, SD, SMP). TU dan keuangan terpusat.
 Cakupan: data siswa, data guru/staf, keuangan, inventaris (semua unit); workspace rapor (hanya SD dan SMP).
 **Tidak ada modul penilaian.** Bukan SaaS: hanya untuk satu sekolah.
-Detail: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/ASSUMPTIONS.md`.
+Detail: `docs/product/PRD.md`, `docs/architecture/ARCHITECTURE.md`, `docs/product/ASSUMPTIONS.md`.
 
 ## 2. Stack (default, dikonfirmasi di T-0.2)
 
@@ -21,7 +21,11 @@ Detail: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/ASSUMPTIONS.md`.
 ```
 backend/    Laravel
 frontend/   React + Vite
-docs/       dokumen proyek
+docs/       dokumen proyek (indeks: docs/README.md)
+  product/        PRD, BACKLOG, ASSUMPTIONS
+  architecture/   ARCHITECTURE, BACKEND, FRONTEND, DATABASE, API, SECURITY, DEPLOYMENT, DECISIONS
+  guides/         UI_GUIDE, MODULE_GUIDE
+  process/        WORKFLOW, PROGRESS, agent-cards/, templates/
 AGENTS.md
 ```
 
@@ -59,7 +63,7 @@ AGENTS.md
 
 - Jalankan perintah **persis** seperti tertulis. Jangan menyimpulkan, mengganti pendekatan, atau "memperbaiki" di luar lingkup.
 - Jika hasil perintah berbeda dari yang diharapkan, atau instruksi ambigu: **berhenti dan laporkan.**
-- Setelah selesai: isi laporan sesuai `docs/templates/TASK_REPORT.md`, perbarui `docs/PROGRESS.md`, lalu commit.
+- Setelah selesai: isi laporan sesuai `docs/process/templates/TASK_REPORT.md`, perbarui `docs/process/PROGRESS.md`, lalu commit.
 
 ## 9. Khusus Antigravity (penulis kode)
 

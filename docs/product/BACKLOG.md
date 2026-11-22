@@ -7,7 +7,7 @@ Ukuran: S · M · L  |  ⚑ = diff wajib direview Claude
 
 Target: demo minggu depan. Jumlah hari menyesuaikan tanggal demo; **hari terakhir selalu buffer**.
 
-Rancangan lengkap (database, API, keamanan, server) ada di `DECISIONS.md` dan dokumen turunannya;
+Rancangan lengkap (database, API, keamanan, server) ada di `docs/architecture/DECISIONS.md` dan dokumen turunannya;
 tiap kartu tugas harus menyebut bagian dokumen yang menjadi rujukannya.
 
 ## Fase A — Demo (prototype tipis tapi menyeluruh)
@@ -17,7 +17,7 @@ tiap kartu tugas harus menyebut bagian dokumen yang menjadi rujukannya.
 |---|---|---|---|---|
 | A-01 | Buat repo baru + struktur `backend/ frontend/ docs/`; taruh kit ini | U + OC | S | |
 | A-02 | Instal Laravel, React/Vite, MySQL + koneksi tes, **satu** library UI (MUI atau Ant Design); konfirmasi perintah di `AGENTS.md` | OC | M | |
-| A-03 | Autentikasi (Sanctum) + peran superadmin, admin_tu_keuangan, guru (spatie permission, seed permission sesuai `BACKEND.md` §3; wali kelas = penugasan, bukan peran) + wajib ganti password pertama | OC | M | ⚑ |
+| A-03 | Autentikasi (Sanctum) + peran superadmin, admin_tu_keuangan, guru (spatie permission, seed permission sesuai `docs/architecture/BACKEND.md` §3; wali kelas = penugasan, bukan peran) + wajib ganti password pertama | OC | M | ⚑ |
 | A-04 | Master: unit (TK/SD/SMP), tahun ajaran, semester, kelas/rombel | OC | M | ⚑ |
 | A-05 | Seeder data dummy (3 unit) | OC | S | |
 
@@ -79,7 +79,7 @@ Yang **tidak boleh** dipotong: auth, siswa, staf, keuangan dasar (A-09–A-13), 
 | ID | Tugas | Pelaksana |
 |---|---|---|
 | B-01 | Ganti template generik dengan template asli sekolah | C + OC/AG |
-| B-02 | Revisi sesuai umpan balik; perbarui `ASSUMPTIONS.md` | U + C |
+| B-02 | Revisi sesuai umpan balik; perbarui `docs/product/ASSUMPTIONS.md` | U + C |
 | B-03 | Impor data siswa/staf dari CSV/Excel | OC |
 | B-04 | Ekspor PDF di server bila hasil cetak browser kurang | AG/OC |
 | B-05 | Audit hak akses semua peran | OC jalankan, C review ⚑ |
@@ -89,5 +89,5 @@ Yang **tidak boleh** dipotong: auth, siswa, staf, keuangan dasar (A-09–A-13), 
 
 - Tes lulus dan lint bersih (untuk Fase A: minimal jalur utama)
 - Tidak ada data asli, `.env`, atau kredensial di commit
-- Laporan tugas terisi; `PROGRESS.md` diperbarui
+- Laporan tugas terisi; `docs/process/PROGRESS.md` diperbarui
 - Tugas ⚑: diff sudah direview Claude

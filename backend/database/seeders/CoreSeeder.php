@@ -17,7 +17,7 @@ use Spatie\Permission\PermissionRegistrar;
 
 class CoreSeeder extends Seeder
 {
-    /** Peran dan permission sesuai docs/BACKEND.md §3. */
+    /** Peran dan permission sesuai docs/architecture/BACKEND.md §3. */
     private const ROLE_PERMISSIONS = [
         'superadmin' => [
             'users.manage', 'system.manage', 'audit.view',

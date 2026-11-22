@@ -75,7 +75,7 @@ Pindah rombel = tutup enrollment lama, buka baru. Kapasitas melebihi = peringata
 **Pembayaran.** Dalam satu transaksi: validasi, kunci tagihan (`lockForUpdate`), alokasi (otomatis ke tagihan tertua atau manual), perbarui `paid_amount` dan `status`, terbitkan nomor kwitansi. Kelebihan bayar ditolak di versi awal.
 `void` pembayaran membalik alokasi dan memperbarui tagihan.
 
-**Kas.** Hanya transaksi di luar pembayaran siswa. Laporan menggabungkan keduanya (lihat `DATABASE.md` §5).
+**Kas.** Hanya transaksi di luar pembayaran siswa. Laporan menggabungkan keduanya (lihat `docs/architecture/DATABASE.md` §5).
 
 **Wali kelas.** Ditetapkan TU per rombel per tahun ajaran. Satu guru maksimal satu rombel per tahun ajaran (divalidasi service). Mengganti wali kelas di tengah tahun memindahkan akses seketika dan tercatat di audit log; draft rapor tetap milik rombel. Setelah tahun ajaran berganti, akses guru ke rombel lama berakhir (hanya TU).
 

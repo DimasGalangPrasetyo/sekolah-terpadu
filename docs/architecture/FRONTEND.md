@@ -64,7 +64,7 @@ Setiap halaman daftar: pencarian, filter, paginasi sisi server, status kosong/mu
  Bilah atas: siswa sebelumnya/berikutnya · status (draft/final) · Cetak · Pengaturan cetak
 ```
 
-- **Form** dibentuk dari `definition` JSON (lihat `DATABASE.md` §4): tiap `section.type` punya komponen form dan komponen render.
+- **Form** dibentuk dari `definition` JSON (lihat `docs/architecture/DATABASE.md` §4): tiap `section.type` punya komponen form dan komponen render.
 - **Preview** memakai komponen render yang **sama** dengan hasil cetak, dalam satuan `mm`, diskalakan ke lebar panel dengan CSS `transform: scale()`.
 - **Overflow dan pagination:** konten diukur terhadap tinggi area cetak (tinggi kertas − margin). Baris tabel dan blok tanda tangan memakai `break-inside: avoid`. Garis putus menandai batas halaman; peringatan muncul bila konten melebihi jumlah halaman yang diharapkan.
 - **Pengaturan cetak** (per template, bisa diubah sebelum cetak): ukuran kertas (A4, F4/Folio, Letter, Custom mm), orientasi, margin, **offset X/Y**, ukuran huruf. Tersedia **Cetak uji** (grid dan penggaris) untuk kalibrasi di kertas khusus.
@@ -102,13 +102,13 @@ Lint (`npm run lint`) dan `npm run build` harus lulus.
 
 - Dev: Vite meneruskan `/api` dan `/sanctum` ke `http://127.0.0.1:8000` (satu asal untuk browser, cookie dan CSRF jalan tanpa CORS).
 - Halaman berat (akun, audit, ganti password) dimuat lazy; unduhan awal lebih ringan.
-- Breakpoint tata letak: **< 992 px = mode HP/tablet** (menu geser, pemilih unit ringkas). Lihat `docs/UI_GUIDE.md`.
+- Breakpoint tata letak: **< 992 px = mode HP/tablet** (menu geser, pemilih unit ringkas). Lihat `docs/guides/UI_GUIDE.md`.
 - Keluar otomatis setelah 30 menit tanpa aktivitas, dengan peringatan 60 detik.
 - Versi: antd 6 (gunakan `title` pada Alert, `size` pada Drawer, `mask.closable` pada Modal), React Router 7, TypeScript 6.
 
 ## 10. Catatan implementasi (Pack 5)
 
-- **Modul otomatis:** `features/<modul>/module.tsx` mengekspor `{ key, routes, nav? }`; router dan menu memuatnya otomatis (`app/modules.ts`). Lihat `docs/MODULE_GUIDE.md`.
+- **Modul otomatis:** `features/<modul>/module.tsx` mengekspor `{ key, routes, nav? }`; router dan menu memuatnya otomatis (`app/modules.ts`). Lihat `docs/guides/MODULE_GUIDE.md`.
 - **Cetak rapor:** isi rapor dirender sama persis untuk pratinjau dan cetak (`ReportPaperContent`). Saat mencetak, `PrintJob` memindahkan isi ke `#print-root`, memasang `@page { size; margin }` dinamis, lalu memanggil `window.print()`.
   Margin efektif = margin template + offset kalibrasi (kiri/atas bertambah, kanan/bawah berkurang). Pengaturan tersimpan per template di `localStorage`.
 - **PDF:** pilih "Simpan sebagai PDF" di dialog cetak browser (ukuran kertas dan skala 100% harus sama dengan pengaturan). PDF dari server ditunda.

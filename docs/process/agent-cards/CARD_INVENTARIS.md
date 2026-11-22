@@ -1,6 +1,6 @@
 # KARTU: modul Inventaris
 
-**Pelaksana:** Antigravity · **Commit:** `feat(inventory): modul inventaris` · **Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/DATABASE.md` §6
+**Pelaksana:** Antigravity · **Commit:** `feat(inventory): modul inventaris` · **Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/DATABASE.md` §6
 **Syarat awal:** kartu Staf sudah selesai dan di-commit (aset memakai staf sebagai penanggung jawab).
 
 ## Tujuan
@@ -11,7 +11,7 @@ TU dapat mengelola aset sekolah: kategori, lokasi, aset, dan riwayat perpindahan
   `app/Http/Requests/Inventory/`, `app/Http/Resources/{AssetResource,AssetMovementResource}.php`, `app/Services/AssetService.php`, `tests/Feature/Inventory/`
 - Backend ubah (hanya menambah `Auditable`): `app/Models/Asset.php`, `app/Models/AssetMovement.php`
 - Frontend baru: `frontend/src/features/inventory/` (`module.tsx`, `lazyPages.tsx`, `api.ts`, `types.ts`, `constants.ts`, `InventoryPage.tsx`, dan komponen tab)
-- Dokumen: bagian di `docs/API.md`, satu baris di `docs/PROGRESS.md`
+- Dokumen: bagian di `docs/architecture/API.md`, satu baris di `docs/process/PROGRESS.md`
 
 ## API (izin: `inventory.view` baca, `inventory.manage` tulis)
 - `GET/POST /asset-categories`, `PUT/DELETE /asset-categories/{id}` (hapus 409 bila dipakai aset). `code` unik.
@@ -38,7 +38,7 @@ guru **403**, superadmin boleh baca tetapi **403** menulis, belum login **401**.
 - `InventoryPage` dengan **Tabs**: **Aset** (tabel + filter + Drawer tambah/ubah + panel detail dengan riwayat dan tombol "Catat perpindahan/kondisi/penghapusan"),
   **Kategori** dan **Lokasi** (tabel sederhana + Drawer). Unit mengikuti pemilih unit di bilah atas.
 - Kondisi ditampilkan sebagai Tag berwarna dengan teks Indonesia (konstanta di `features/inventory/constants.ts`).
-- Responsif sesuai `docs/UI_GUIDE.md` (375/768/1280). Tombol tambah/ubah hanya bila `inventory.manage`.
+- Responsif sesuai `docs/guides/UI_GUIDE.md` (375/768/1280). Tombol tambah/ubah hanya bila `inventory.manage`.
 
 ## Selesai bila
 `php artisan test` semua lulus · `pint --test` bersih · `npm run lint` dan `npm run build` lulus · uji manual sebagai `tu`.

@@ -19,7 +19,7 @@ Status: `BELUM` (belum dikonfirmasi) · `BENAR` · `SALAH` · `REVISI`.
 | A-12 | Rapor | Tidak ada hitung nilai otomatis; semua isian manual | Cakupan M4 | BELUM | |
 | A-13 | Rapor | Keluaran cukup PDF (tidak wajib file Word) | Teknologi ekspor | BELUM | |
 | A-14 | Rapor | Alur status: draft → final (persetujuan kepala sekolah opsional) | Alur dan peran | BELUM | |
-| A-15 | Peran | Tiga peran: superadmin, admin TU & keuangan (lintas unit), guru (wali kelas = penugasan). Tanpa peran hanya-lihat | Hak akses | REVISI | 2026-10-07: tanpa peran view-only; butuh pengelola akun (lihat `DECISIONS.md` §2) |
+| A-15 | Peran | Tiga peran: superadmin, admin TU & keuangan (lintas unit), guru (wali kelas = penugasan). Tanpa peran hanya-lihat | Hak akses | REVISI | 2026-10-07: tanpa peran view-only; butuh pengelola akun (lihat `docs/architecture/DECISIONS.md` §2) |
 | A-16 | Data awal | Data awal ada di buku induk/Excel dan perlu diimpor | Fitur impor | BELUM | |
 | A-17 | Operasional | Dipakai lewat browser desktop; hosting belum diketahui (prototype dijalankan lokal/demo) | Deployment | BELUM | |
 | A-18 | Integrasi | Tidak ada integrasi Dapodik/e-Rapor di versi awal | Cakupan | BELUM | |
@@ -34,6 +34,13 @@ Status: `BELUM` (belum dikonfirmasi) · `BENAR` · `SALAH` · `REVISI`.
 | A-27 | Keuangan | Diskon per siswa per tahun ajaran, nominal tetap atau persen; tidak ditumpuk (diskon spesifik jenis biaya menang atas diskon "semua jenis biaya"); persen dibulatkan ke bawah ke rupiah penuh | Skema kalkulasi potongan tagihan | BELUM | Usulan PM, menunggu review sekolah |
 | A-28 | Keuangan | Tanpa denda keterlambatan dan tanpa saldo lebih/deposit; tahun ajaran Juli–Juni; jatuh tempo SPP tanggal 10 | Kebijakan tagihan & jatuh tempo | BELUM | Usulan PM, menunggu review sekolah |
 | A-29 | Keuangan | Tarif dan diskon yang diubah hanya memengaruhi tagihan yang dibuat sesudahnya | Konsistensi data historis tagihan | BELUM | Usulan PM, menunggu review sekolah |
+| A-30 | Keuangan | Satu siswa satu tagihan bulanan per bulan; isinya semua jenis biaya bulanan aktif yang punya tarif. Hanya siswa berstatus aktif dengan rombel aktif di tahun ajaran itu yang ditagih | Isi tagihan bulanan dan siapa yang ditagih | BELUM | Usulan PM, menunggu review sekolah |
+| A-31 | Keuangan | Diskon nominal "semua jenis biaya" dipotongkan sekali per tagihan (dihabiskan berurutan antarbaris); tagihan bertotal Rp 0 (diskon penuh) otomatis berstatus lunas | Perhitungan diskon dan status lunas | BELUM | Usulan PM, menunggu review sekolah |
+| A-32 | Keuangan | Biaya sekali bayar/tahunan (uang pangkal, seragam, kegiatan) hanya satu per siswa per tahun ajaran selama belum di-void; biaya bulanan tidak lewat tagihan manual | Aturan tagihan manual | BELUM | Usulan PM, menunggu review sekolah |
+| A-33 | Keuangan | Satu pembayaran milik satu siswa dan harus teralokasi penuh ke tagihannya; tidak ada kelebihan bayar atau deposit. Pembayaran sebagian per tagihan diperbolehkan | Alur pembayaran dan penanganan kelebihan bayar | BELUM | Usulan PM, menunggu review sekolah |
+| A-34 | Keuangan | Tanpa pilihan tagihan, pembayaran dialokasikan otomatis ke tagihan terlama (jatuh tempo paling lama dulu; tanpa jatuh tempo paling akhir) | Urutan alokasi pembayaran | BELUM | Usulan PM, menunggu review sekolah |
+| A-35 | Keuangan | Metode bayar Tunai/Transfer/Lainnya; transfer wajib mencatat nomor referensi/bukti; tanggal bayar boleh mundur tetapi tidak boleh melewati hari ini | Validasi pencatatan pembayaran | BELUM | Usulan PM, menunggu review sekolah |
+| A-36 | Keuangan | Kwitansi bernomor `KWT/TTTT/BB/NNNN`; pembayaran yang salah dibatalkan (void) dan dicatat ulang, nomor kwitansi lama tidak dipakai lagi; kwitansi void tetap bisa dibuka dan ditandai "Dibatalkan" | Alur koreksi dan penomoran kwitansi | BELUM | Usulan PM, menunggu review sekolah |
 | A-37 | Keuangan | Transaksi kas tidak dapat diubah setelah dicatat; kesalahan dikoreksi dengan membatalkan (void, wajib alasan) lalu mencatat ulang | Alur koreksi transaksi | BELUM | Usulan PM, menunggu review sekolah |
 | A-38 | Keuangan | Tanggal kas tidak boleh melewati hari ini (WIB); jenis kategori kas (masuk/keluar) tetap setelah dibuat; kategori nonaktif tidak dapat dipakai untuk transaksi baru | Validasi dan integritas kategori | BELUM | Usulan PM, menunggu review sekolah |
 | A-39 | Keuangan | Kas masuk/keluar hanya untuk transaksi di luar pembayaran siswa; lampiran bukti belum tersedia (nomor nota boleh ditulis di keterangan) | Cakupan modul kas | BELUM | Usulan PM, menunggu review sekolah |

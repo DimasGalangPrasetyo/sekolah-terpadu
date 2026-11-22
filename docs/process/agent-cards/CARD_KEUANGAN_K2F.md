@@ -1,8 +1,8 @@
 # KARTU: Keuangan K-2F — Tab Tagihan (frontend)
 
 **Pelaksana:** Antigravity · **Commit:** `feat(finance): tab tagihan (daftar, generate bulanan, manual, detail, void)`
-**Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/API.md` (bagian Tagihan), dan contoh `features/finance/DiscountTab.tsx` + `DiscountDrawer.tsx`
-**Simpan kartu ini di:** `docs/agent-cards/CARD_KEUANGAN_K2F.md`
+**Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/API.md` (bagian Tagihan), dan contoh `features/finance/DiscountTab.tsx` + `DiscountDrawer.tsx`
+**Simpan kartu ini di:** `docs/process/agent-cards/CARD_KEUANGAN_K2F.md`
 
 ## Tujuan
 TU dapat melihat tagihan, menerbitkan SPP bulanan massal (dengan pratinjau), membuat tagihan manual, melihat detail, dan membatalkan (void) tagihan.
@@ -12,7 +12,7 @@ TU dapat melihat tagihan, menerbitkan SPP bulanan massal (dengan pratinjau), mem
 - Baru di `frontend/src/features/finance/`: `InvoiceTab.tsx`, `GenerateInvoicesModal.tsx`, `InvoiceCreateDrawer.tsx`, `InvoiceDetailDrawer.tsx`, `VoidInvoiceModal.tsx`
 - Tambah (jangan hapus isi lama) di: `api.ts`, `types.ts`, `constants.ts`
 - Ubah satu hal di `tabs.tsx`: tambahkan tab **Tagihan** sebagai tab **pertama** (key `invoices`), sehingga menjadi tab awal
-- Dokumen: satu baris di `docs/PROGRESS.md` (`K-2 frontend | Selesai | <tanggal> | Antigravity | Tab Tagihan`)
+- Dokumen: satu baris di `docs/process/PROGRESS.md` (`K-2 frontend | Selesai | <tanggal> | Antigravity | Tab Tagihan`)
 
 ## Kontrak API (semua di bawah `/api/v1`, bungkus respons `{ data }`; daftar ber-`meta` paginasi)
 
@@ -82,7 +82,7 @@ Galat: 422 berisi `errors` per kolom (termasuk `items.0.unit_price`, `items.1.fe
 - Peringatan singkat bahwa pembatalan tidak dapat diurungkan. Kolom alasan wajib (min 5 karakter, maks 255). Galat 409 ditampilkan sebagai Alert di dalam modal (mis. "sudah ada pembayarannya"), bukan toast. Sukses: tutup, refresh daftar dan detail.
 
 ## Aturan umum
-- Teks antarmuka Indonesia; responsif sesuai `docs/UI_GUIDE.md` (uji 375/768/1280); Drawer penuh lebar di layar sempit.
+- Teks antarmuka Indonesia; responsif sesuai `docs/guides/UI_GUIDE.md` (uji 375/768/1280); Drawer penuh lebar di layar sempit.
 - Tombol tulis hanya bila `finance.manage`. Tombol aksi dinonaktifkan selama mutasi berjalan (cegah klik ganda).
 - Jangan menambah paket npm. Jangan mengubah file di luar lingkup.
 

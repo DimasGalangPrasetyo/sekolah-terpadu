@@ -1,7 +1,7 @@
 # PRD — Sistem Administrasi Sekolah (TK + SD + SMP, satu yayasan)
 
 Status dokumen: **draf prototype**. Detail banyak yang diasumsikan "pada umumnya"
-dan akan direvisi setelah review sekolah (lihat `ASSUMPTIONS.md`).
+dan akan direvisi setelah review sekolah (lihat `docs/product/ASSUMPTIONS.md`).
 
 ## 1. Latar belakang
 

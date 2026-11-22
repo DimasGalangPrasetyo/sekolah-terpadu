@@ -93,8 +93,9 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 | GET/POST | `/invoices` | Daftar (filter unit, status, periode, siswa) / manual | D |
 | GET | `/invoices/{id}` | Detail | D |
 | POST | `/invoices/{id}/void` | Void (alasan) | D |
-| GET | `/students/{id}/billing` | Tunggakan siswa | D |
-| GET/POST | `/payments` | Daftar / catat (alokasi otomatis/manual) | D |
+| GET | `/students/{id}/billing` | Tunggakan siswa (rencana, bagian laporan K-5) | P |
+| GET/POST | `/payments` | Daftar / catat (alokasi otomatis ke tagihan terlama, atau eksplisit per tagihan; kelebihan bayar ditolak) | D |
+| GET | `/payments/open-invoices?student_id=` | Tagihan terbuka siswa, urut terlama (urutan alokasi otomatis) | D |
 | GET | `/payments/{id}`, `/payments/{id}/receipt` | Detail / data kwitansi | D |
 | POST | `/payments/{id}/void` | Void (alasan) | D |
 | GET | `/cash-categories?type=&is_active=` | Daftar kategori kas (tanpa paginasi, urut type lalu name) | D |
@@ -146,7 +147,7 @@ Endpoint yang dibangun (menggantikan rincian lama di atas bila berbeda). Paramet
 
 ## Pembaruan Pack 5 (Rapor dan Profil Sekolah)
 
-Rute modul baru dimuat otomatis dari `backend/routes/v1/*.php` (lihat `docs/MODULE_GUIDE.md`).
+Rute modul baru dimuat otomatis dari `backend/routes/v1/*.php` (lihat `docs/guides/MODULE_GUIDE.md`).
 
 | Method | Path | Izin | Keterangan |
 |---|---|---|---|

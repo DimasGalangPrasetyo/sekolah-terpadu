@@ -6,7 +6,7 @@
 |---|---|---|
 | Lokal (laptop) | Pengembangan dan **demo** | Dummy |
 | Staging (opsional) | Uji sebelum produksi | Dummy |
-| Produksi | Dipakai sekolah | Asli (setelah checklist `SECURITY.md` §9) |
+| Produksi | Dipakai sekolah | Asli (setelah checklist `docs/architecture/SECURITY.md` §9) |
 
 ## 2. Rekomendasi produksi
 

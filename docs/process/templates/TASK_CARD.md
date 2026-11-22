@@ -6,7 +6,7 @@
 TUGAS: T-x.y — <judul>
 PELAKSANA: OpenCode
 CABANG: task/T-x.y-<nama-singkat>
-BACA DULU: AGENTS.md, docs/ARCHITECTURE.md
+BACA DULU: AGENTS.md, docs/architecture/ARCHITECTURE.md
 
 LINGKUP FILE (hanya ini yang boleh diubah/dibuat):
 - <path 1>
@@ -30,7 +30,7 @@ BERHENTI DAN LAPORKAN (jangan memperbaiki sendiri) JIKA:
 
 DILARANG: menyimpulkan, mengganti pendekatan, menambah fitur, git push.
 
-SETELAH SELESAI: isi laporan (docs/templates/TASK_REPORT.md), perbarui docs/PROGRESS.md, commit.
+SETELAH SELESAI: isi laporan (docs/process/templates/TASK_REPORT.md), perbarui docs/process/PROGRESS.md, commit.
 ```
 
 ## B. Untuk Antigravity (rencana dulu)
@@ -46,7 +46,7 @@ sebelum rencana saya setujui.
 TUJUAN:
 <satu paragraf>
 
-KONTEKS (baca): AGENTS.md, docs/ARCHITECTURE.md, <file terkait>
+KONTEKS (baca): AGENTS.md, docs/architecture/ARCHITECTURE.md, <file terkait>
 
 LINGKUP (boleh diubah): <daftar file/folder>
 DI LUAR LINGKUP (jangan disentuh): <daftar>

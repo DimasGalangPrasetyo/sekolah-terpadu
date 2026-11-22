@@ -1,8 +1,8 @@
 # KARTU: Keuangan K-4 — Kas Masuk/Keluar dan Kategori Kas
 
 **Pelaksana:** Antigravity · **Commit:** `feat(finance): kas masuk/keluar dan kategori kas`
-**Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/DATABASE.md` §5, dan contoh pola terdekat: `app/Services/PaymentService.php`, `app/Services/DocumentNumberService.php`, `PaymentController.php`, `PaymentRequest.php`, `features/finance/PaymentTab.tsx`, `VoidPaymentModal.tsx`
-**Simpan kartu ini di:** `docs/agent-cards/CARD_KEUANGAN_K4.md`
+**Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/DATABASE.md` §5, dan contoh pola terdekat: `app/Services/PaymentService.php`, `app/Services/DocumentNumberService.php`, `PaymentController.php`, `PaymentRequest.php`, `features/finance/PaymentTab.tsx`, `VoidPaymentModal.tsx`
+**Simpan kartu ini di:** `docs/process/agent-cards/CARD_KEUANGAN_K4.md`
 **Syarat:** kerjakan **setelah K-3F di-commit** (kartu ini menambah tab di `tabs.tsx` yang juga diubah K-3F).
 
 ## Tujuan
@@ -19,7 +19,7 @@ Pembayaran siswa **tidak** disalin ke kas (hindari ganda); laporan gabungan dibu
 - Backend ubah (hanya tambah trait `Auditable`): `app/Models/CashCategory.php`, `app/Models/CashTransaction.php`
 - Frontend baru di `frontend/src/features/finance/`: `CashTab.tsx`, `CashDrawer.tsx`, `CashDetailDrawer.tsx`, `VoidCashModal.tsx`, `CashCategoryTab.tsx`, `CashCategoryDrawer.tsx`
 - Frontend tambah (jangan hapus isi lama): `types.ts`, `api.ts`, `constants.ts`; ubah `tabs.tsx` (tab **Kas** setelah Pembayaran, tab **Kategori Kas** paling akhir)
-- Dokumen: `docs/API.md`, satu baris `docs/PROGRESS.md`, dan baris A-37 s.d. A-39 di `docs/ASSUMPTIONS.md` (isi di bawah)
+- Dokumen: `docs/architecture/API.md`, satu baris `docs/process/PROGRESS.md`, dan baris A-37 s.d. A-39 di `docs/product/ASSUMPTIONS.md` (isi di bawah)
 
 ## API (izin: `finance.view` baca, `finance.manage` tulis; respons dibungkus `{ data }`, daftar bertransaksi ber-`meta` paginasi)
 
@@ -86,10 +86,10 @@ Rincian lengkap (nomor, tanggal, jenis, kategori, unit, nominal, keterangan, dic
 Tabel (nama, jenis sebagai Tag, status), filter jenis dan status, tombol Tambah Kategori. Aksi baris: Ubah, Nonaktifkan/Aktifkan, Hapus (konfirmasi; tampilkan pesan 409 dari server). `CashCategoryDrawer`: nama dan jenis; **jenis tidak bisa diubah saat ubah** (disabled).
 
 ### Umum
-Teks Indonesia; responsif (375/768/1280) sesuai `docs/UI_GUIDE.md`; tombol tulis hanya bila `finance.manage`; nonaktifkan tombol selama mutasi berjalan; gunakan `getErrorMessage` untuk semua galat; tanpa paket npm baru. Lampiran bukti (`proof_path`) **belum** dibuat: jangan menambah unggah berkas.
+Teks Indonesia; responsif (375/768/1280) sesuai `docs/guides/UI_GUIDE.md`; tombol tulis hanya bila `finance.manage`; nonaktifkan tombol selama mutasi berjalan; gunakan `getErrorMessage` untuk semua galat; tanpa paket npm baru. Lampiran bukti (`proof_path`) **belum** dibuat: jangan menambah unggah berkas.
 
 ## Dokumen yang ditambahkan
-`docs/API.md` (semua endpoint di atas), satu baris `docs/PROGRESS.md` (`K-4 | Selesai | <tanggal> | Antigravity | Kas masuk/keluar dan kategori kas`), dan di `docs/ASSUMPTIONS.md` (status **BELUM**, catatan "Usulan PM, menunggu review sekolah"):
+`docs/architecture/API.md` (semua endpoint di atas), satu baris `docs/process/PROGRESS.md` (`K-4 | Selesai | <tanggal> | Antigravity | Kas masuk/keluar dan kategori kas`), dan di `docs/product/ASSUMPTIONS.md` (status **BELUM**, catatan "Usulan PM, menunggu review sekolah"):
 - **A-37** Keuangan: transaksi kas tidak dapat diubah setelah dicatat; kesalahan dikoreksi dengan membatalkan (void, wajib alasan) lalu mencatat ulang
 - **A-38** Keuangan: tanggal kas tidak boleh melewati hari ini (WIB); jenis kategori kas (masuk/keluar) tetap setelah dibuat; kategori nonaktif tidak dapat dipakai untuk transaksi baru
 - **A-39** Keuangan: kas masuk/keluar hanya untuk transaksi di luar pembayaran siswa; lampiran bukti belum tersedia (nomor nota boleh ditulis di keterangan)

@@ -32,10 +32,10 @@ Polanya: contoh `StudentController`, `StudentRequest`, `StudentResource`, `Stude
 | Konstanta | `features/<modul>/constants.ts` |
 
 - `key` yang sama dengan menu "segera hadir" (`staff`, `inventory`, ...) **menggantikan** halaman placeholder-nya.
-- Halaman memakai `RequirePermission`; terapkan pola dari `features/students/*` dan `docs/UI_GUIDE.md`.
+- Halaman memakai `RequirePermission`; terapkan pola dari `features/students/*` dan `docs/guides/UI_GUIDE.md`.
 - Contoh modul lengkap: `features/reportcards/` dan `features/school/`.
 
 ## Aturan umum
 
-Ikuti `AGENTS.md` dan `docs/UI_GUIDE.md`. Data dummy saja. Jangan menjalankan `migrate:fresh`, `db:wipe`, atau seeder
+Ikuti `AGENTS.md` dan `docs/guides/UI_GUIDE.md`. Data dummy saja. Jangan menjalankan `migrate:fresh`, `db:wipe`, atau seeder
 pada database pengembangan (tes memakai SQLite memori dan aman).

@@ -37,7 +37,7 @@ tentang Pelindungan Data Pribadi (ini bukan nasihat hukum; konsultasikan sebelum
 - `.env` tidak di-commit; izin file 600; `APP_DEBUG=false` di produksi.
 - Pengguna DB aplikasi berprivilege minimal (tanpa root, tanpa DDL di produksi setelah migrasi).
 - Log tidak memuat data pribadi (nama lengkap, alamat, nomor telepon).
-- Cadangan dienkripsi dan disimpan di luar server (lihat `DEPLOYMENT.md`).
+- Cadangan dienkripsi dan disimpan di luar server (lihat `docs/architecture/DEPLOYMENT.md`).
 - Kebijakan retensi (berapa lama data siswa lulus disimpan) ditanyakan ke sekolah; sediakan prosedur anonimisasi/penghapusan.
 
 ## 5. Integritas dan audit

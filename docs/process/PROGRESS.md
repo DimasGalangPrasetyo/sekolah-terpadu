@@ -14,11 +14,13 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | A-08b / A-08c | Selesai (backend) | 2026-10-10 | task/A-03-auth | Manajemen akun dan audit log; UI ada di Pack 3 |
 | A-UI-1 | Selesai | 2026-10-11 | main | Pack 3 + perbaikan 3.1 (tombol Keluar); 40 tes lulus; login, dashboard, logout teruji manual |
 | A-06 | Selesai | 2026-10-13 | main | Pack 4: Data Master dan Siswa; 76 tes lulus; teruji manual |
-| A-08 | Berjalan | 2026-10-14 | main | Pack 5: workspace rapor (form + pratinjau + cetak), profil sekolah, titik perluasan modul |
+| A-15 – A-18 | Selesai | 2026-10-18 | main | Pack 5/5b: workspace rapor (form + pratinjau + cetak, draft/final), profil sekolah, titik perluasan modul |
 | A-07 | Selesai | 2026-10-20 | task/A-07-staff | Modul staf: CRUD, penugasan unit, aktivasi/deaktivasi, UI lengkap |
-| A-09 | Selesai | 2026-10-20 | task/A-09-inventory | Modul inventaris: kategori, lokasi, aset, riwayat perpindahan/kondisi, UI lengkap |
+| A-14 | Selesai | 2026-10-20 | task/A-09-inventory | Modul inventaris: kategori, lokasi, aset, riwayat perpindahan/kondisi, UI lengkap |
 | K-1 | Selesai | 2026-10-31 | task/K-1-finance-setup | Jenis biaya, tarif, diskon siswa |
+| K-2 backend | Selesai | 2026-11 | main | Tagihan bulanan massal (idempoten, dry-run), tagihan manual, void, penomoran `INV`; migrasi `active_period` |
 | K-2 frontend | Selesai | 2026-11-13 | main | Tab Tagihan |
+| K-3 backend | Selesai | 2026-11 | main | Pembayaran, alokasi, kwitansi (terbilang), void pembayaran, zona waktu WIB |
 | K-3 frontend | Selesai | 2026-11-17 | Antigravity | Tab Pembayaran, kwitansi |
 | K-4 | Selesai | 2026-11-21 | Antigravity | Kas masuk/keluar dan kategori kas |
 

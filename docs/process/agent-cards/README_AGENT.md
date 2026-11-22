@@ -8,6 +8,6 @@
 6. Setelah agen selesai, **kamu sendiri** jalankan: `php artisan test`, `php vendor/bin/pint --test`, `npm run lint`, `npm run build`,
    lalu coba manual. Jangan percaya laporan agen tanpa menjalankannya.
 7. Commit ke `main` dengan pesan yang ditentukan di kartu. Jangan `git push` oleh agen.
-8. Catat persentase kuota sebelum dan sesudah di `docs/PROGRESS.md`.
+8. Catat persentase kuota sebelum dan sesudah di `docs/process/PROGRESS.md`.
 
 Jika agen macet dua kali pada hal yang sama: berhenti, salin potongan galat ke chat PM; jangan mengulang tanpa diagnosis.

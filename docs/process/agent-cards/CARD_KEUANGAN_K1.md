@@ -1,7 +1,7 @@
 # KARTU: Keuangan K-1 — Jenis Biaya, Tarif, Diskon Siswa
 
-**Pelaksana:** Antigravity · **Commit:** `feat(finance): jenis biaya, tarif, dan diskon siswa` · **Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/DATABASE.md` §5 dan §7
-**Simpan kartu ini di:** `docs/agent-cards/CARD_KEUANGAN_K1.md`
+**Pelaksana:** Antigravity · **Commit:** `feat(finance): jenis biaya, tarif, dan diskon siswa` · **Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/DATABASE.md` §5 dan §7
+**Simpan kartu ini di:** `docs/process/agent-cards/CARD_KEUANGAN_K1.md`
 
 ## Tujuan
 TU dapat mengatur **jenis biaya**, **tarif** per unit/tingkat/tahun ajaran, dan **diskon/keringanan siswa**.
@@ -17,7 +17,7 @@ Seeder sudah mengisi jenis biaya awal (SPP, UANG_PANGKAL, SERAGAM, KEGIATAN) dan
   `app/Services/FeeService.php`, `tests/Feature/Finance/`, `tests/Concerns/FinanceFixtures.php`
 - Backend ubah (hanya menambah trait `Auditable` dan `$auditExclude`): `app/Models/FeeType.php`, `app/Models/FeeRate.php`, `app/Models/StudentDiscount.php`
 - Frontend baru: `frontend/src/features/finance/` (`module.tsx`, `lazyPages.tsx`, `api.ts`, `types.ts`, `constants.ts`, `tabs.tsx`, `FinancePage.tsx`, `FeeTypeTab.tsx`, `FeeRateTab.tsx`, `DiscountTab.tsx`, dan drawer yang diperlukan)
-- Dokumen: bagian di `docs/API.md`, satu baris di `docs/PROGRESS.md`, baris A-26 s.d. A-29 di `docs/ASSUMPTIONS.md` (isi di bawah)
+- Dokumen: bagian di `docs/architecture/API.md`, satu baris di `docs/process/PROGRESS.md`, baris A-26 s.d. A-29 di `docs/product/ASSUMPTIONS.md` (isi di bawah)
 
 ## API (izin: `finance.view` baca, `finance.manage` tulis)
 
@@ -92,11 +92,11 @@ Gunakan `SchoolFixtures`, `CoreSeeder`, dan trait baru `FinanceFixtures`.
 - **Tarif:** filter tahun ajaran (default aktif) dan jenis biaya; **unit mengikuti pemilih unit di bilah atas** lewat `useUiStore`. Tabel: jenis biaya, unit (Tag), tingkat ("Semua tingkat" bila kosong), nominal `formatRupiah`. Drawer tambah (pilih jenis biaya, unit, tingkat opsional yang daftar pilihannya mengikuti unit, nominal) dan ubah (hanya nominal; kolom lain disabled). Hapus dengan konfirmasi.
 - **Diskon:** filter cari/tahun ajaran/jenis biaya/status, tabel server-side (siswa + NIS, jenis biaya atau "Semua jenis biaya", potongan sebagai `Rp 50.000` atau `25%`, alasan [lg], status) + Drawer. Pemilih siswa memakai pencarian `GET /students?q=` (debounce) dan disabled saat ubah. Aksi: Ubah, Nonaktifkan/Aktifkan.
 - Tombol tulis hanya tampil bila `finance.manage`. Input nominal: `InputNumber` bilangan bulat, min 1, tampilan pemisah ribuan titik.
-- Galat 422/409 tampil di kolom/Alert. Responsif sesuai `docs/UI_GUIDE.md` (uji 375/768/1280). Semua teks Indonesia.
+- Galat 422/409 tampil di kolom/Alert. Responsif sesuai `docs/guides/UI_GUIDE.md` (uji 375/768/1280). Semua teks Indonesia.
 
 ## Dokumen yang ditambahkan
-`docs/API.md` (semua endpoint di atas) dan satu baris `docs/PROGRESS.md` (`K-1 | Selesai | <tanggal> | … | Jenis biaya, tarif, diskon siswa`).
-Tambahkan ke `docs/ASSUMPTIONS.md` (status **BELUM**, catatan "Usulan PM, menunggu review sekolah"):
+`docs/architecture/API.md` (semua endpoint di atas) dan satu baris `docs/process/PROGRESS.md` (`K-1 | Selesai | <tanggal> | … | Jenis biaya, tarif, diskon siswa`).
+Tambahkan ke `docs/product/ASSUMPTIONS.md` (status **BELUM**, catatan "Usulan PM, menunggu review sekolah"):
 - **A-26** Keuangan: tarif ditentukan per jenis biaya, unit, tingkat, dan tahun ajaran; tarif tingkat spesifik menang atas tarif "semua tingkat"; tanpa tarif berarti tagihan dilewati, bukan Rp 0
 - **A-27** Keuangan: diskon per siswa per tahun ajaran, nominal tetap atau persen; **tidak ditumpuk** (diskon spesifik jenis biaya menang atas diskon "semua jenis biaya"); persen dibulatkan ke bawah ke rupiah penuh
 - **A-28** Keuangan: tanpa denda keterlambatan dan tanpa saldo lebih/deposit; tahun ajaran Juli–Juni; jatuh tempo SPP tanggal 10

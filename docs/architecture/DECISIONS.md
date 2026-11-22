@@ -1,8 +1,8 @@
 # DECISIONS — Keputusan PM
 
-Status: usulan PM, **berlaku setelah dikonfirmasi pemilik proyek**. Perubahan dicatat di `PROGRESS.md`.
+Status: usulan PM, **berlaku setelah dikonfirmasi pemilik proyek**. Perubahan dicatat di `docs/process/PROGRESS.md`.
 Dokumen rancangan lain dipecah per topik agar agent hanya membaca yang perlu:
-`DATABASE.md` · `BACKEND.md` · `API.md` · `FRONTEND.md` · `SECURITY.md` · `DEPLOYMENT.md` · `WORKFLOW.md`
+`docs/architecture/DATABASE.md` · `docs/architecture/BACKEND.md` · `docs/architecture/API.md` · `docs/architecture/FRONTEND.md` · `docs/architecture/SECURITY.md` · `docs/architecture/DEPLOYMENT.md` · `docs/process/WORKFLOW.md`
 
 ## 1. Cakupan
 
@@ -75,6 +75,9 @@ Semua laporan (siswa, staf, keuangan, inventaris) dan kwitansi memakai komponen 
 | D-10 | Data NIK/No. KK **tidak dikumpulkan** di versi awal | Minimalisasi data pribadi anak |
 | D-11 | Demo dari laptop/staging dengan **data dummy**; server produksi setelah review | Aman dan realistis untuk seminggu |
 | D-12 | Wali kelas = penugasan guru per rombel per tahun ajaran, bukan peran; akses rapor lewat Policy | Sesuai praktik sekolah; ganti rombel antar tahun tanpa ubah peran |
+| D-13 | Batas unik tagihan bulanan memakai kolom biasa `invoices.active_period` (diisi service, NULL saat void), bukan generated column | Tagihan yang di-void dapat dibuat ulang untuk bulan yang sama; tetap sesuai D-07 |
+| D-14 | Zona waktu aplikasi `Asia/Jakarta` (WIB), dapat diganti lewat `APP_TIMEZONE` | Tanggal pembayaran dan nomor dokumen mengikuti hari kerja sekolah, bukan UTC |
+| D-15 | Pembayaran dan void memakai kunci baris berurutan dalam satu transaksi (siswa lalu tagihan berurut id; void: pembayaran lalu tagihan berurut id) | Mencegah kelebihan alokasi dan deadlock saat dua kasir bekerja bersamaan |
 
 ## 5. Yang dibangun saat demo (D) vs setelah demo (P)
 

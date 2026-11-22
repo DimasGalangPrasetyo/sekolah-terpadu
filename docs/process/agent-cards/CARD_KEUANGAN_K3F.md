@@ -1,8 +1,8 @@
 # KARTU: Keuangan K-3F — Pembayaran dan Kwitansi (frontend)
 
 **Pelaksana:** Antigravity · **Commit:** `feat(finance): tab pembayaran, catat pembayaran, kwitansi cetak, void pembayaran`
-**Baca dulu:** `AGENTS.md`, `docs/MODULE_GUIDE.md`, `docs/UI_GUIDE.md`, `docs/API.md` (bagian Pembayaran), contoh `features/finance/InvoiceTab.tsx`, `InvoiceCreateDrawer.tsx`, `InvoiceDetailDrawer.tsx`, `VoidInvoiceModal.tsx`, dan `features/reportcards/components/PrintJob.tsx`
-**Simpan kartu ini di:** `docs/agent-cards/CARD_KEUANGAN_K3F.md`
+**Baca dulu:** `AGENTS.md`, `docs/guides/MODULE_GUIDE.md`, `docs/guides/UI_GUIDE.md`, `docs/architecture/API.md` (bagian Pembayaran), contoh `features/finance/InvoiceTab.tsx`, `InvoiceCreateDrawer.tsx`, `InvoiceDetailDrawer.tsx`, `VoidInvoiceModal.tsx`, dan `features/reportcards/components/PrintJob.tsx`
+**Simpan kartu ini di:** `docs/process/agent-cards/CARD_KEUANGAN_K3F.md`
 
 ## Tujuan
 TU dapat mencatat pembayaran siswa (memilih tagihan atau nominal saja), melihat daftar pembayaran, mencetak kwitansi, dan membatalkan (void) pembayaran.
@@ -13,7 +13,7 @@ TU dapat mencatat pembayaran siswa (memilih tagihan atau nominal saja), melihat 
 - Tambah (jangan hapus isi lama): `types.ts`, `api.ts`, `constants.ts`
 - Ubah kecil: `tabs.tsx` (tab **Pembayaran** sebagai tab kedua, setelah Tagihan), `InvoiceTab.tsx` dan `InvoiceDetailDrawer.tsx` (tombol **Bayar**, lihat bawah)
 - **Boleh diimpor, jangan diubah:** `features/reportcards/components/PrintJob.tsx`
-- Dokumen: satu baris `docs/PROGRESS.md` (`K-3 frontend | Selesai | <tanggal> | Antigravity | Tab Pembayaran, kwitansi`)
+- Dokumen: satu baris `docs/process/PROGRESS.md` (`K-3 frontend | Selesai | <tanggal> | Antigravity | Tab Pembayaran, kwitansi`)
 
 ## Kontrak API (di bawah `/api/v1`, respons dibungkus `{ data }`; daftar ber-`meta` paginasi)
 
@@ -100,7 +100,7 @@ Di `InvoiceDetailDrawer`, bila `finance.manage` dan status tagihan `unpaid` atau
 - Tersedia dari `PaymentDetailDrawer`, dari tombol Cetak di baris tabel (menu aksi), dan dari modal sukses setelah catat pembayaran.
 
 ## Aturan umum
-- Teks antarmuka Indonesia; responsif sesuai `docs/UI_GUIDE.md` (uji 375/768/1280); Drawer penuh lebar di layar sempit.
+- Teks antarmuka Indonesia; responsif sesuai `docs/guides/UI_GUIDE.md` (uji 375/768/1280); Drawer penuh lebar di layar sempit.
 - Tombol tulis hanya bila `finance.manage`. Nonaktifkan tombol selama mutasi berjalan (cegah klik ganda; ini uang).
 - Jangan menyentuh berkas di luar lingkup. Jangan menambah paket npm. Jangan mengubah backend.
 

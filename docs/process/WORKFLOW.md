@@ -1,6 +1,6 @@
 # WORKFLOW — Urutan pengerjaan dari awal sampai akhir
 
-Rincian tugas ada di `BACKLOG.md`; dokumen ini menjelaskan **urutan, gerbang, dan ritme kerja**.
+Rincian tugas ada di `docs/product/BACKLOG.md`; dokumen ini menjelaskan **urutan, gerbang, dan ritme kerja**.
 
 ## Tahap 0 — Persiapan repo (sebelum Hari 1)
 
@@ -12,7 +12,7 @@ Checklist:
 - [ ] Dua database lokal: `app_dev` dan `app_test` (untuk tes MySQL)
 - [ ] OpenCode terhubung ke model gratis; uji satu tugas kecil (30 menit)
 - [ ] Antigravity: catat status kuota (ditunda sementara)
-- [ ] Baca ringkas `DECISIONS.md`, lalu konfirmasi atau koreksi keputusannya
+- [ ] Baca ringkas `docs/architecture/DECISIONS.md`, lalu konfirmasi atau koreksi keputusannya
 
 ## Tahap 1 — Fondasi (Hari 1)
 
@@ -47,17 +47,17 @@ Dashboard, perbaikan bug jalur demo, **pembekuan fitur**, data dummy yang meyaki
 ## ▶ DEMO ◀
 
 Sampaikan: ini **prototype berbasis asumsi umum**, data dummy, dan template rapor generik.
-Bawa `ASSUMPTIONS.md` dan catat setiap jawaban sekolah langsung di tempat.
+Bawa `docs/product/ASSUMPTIONS.md` dan catat setiap jawaban sekolah langsung di tempat.
 
 ## Tahap 7 — Umpan balik dan revisi
 
-Perbarui `ASSUMPTIONS.md`; minta template rapor asli dan contoh kertas; minta jawaban O-02–O-05;
+Perbarui `docs/product/ASSUMPTIONS.md`; minta template rapor asli dan contoh kertas; minta jawaban O-02–O-05;
 daftar revisi diprioritaskan PM; ganti template generik dengan template asli (B-01).
 
 ## Tahap 8 — Hardening dan produksi
 
 Impor data awal, kenaikan kelas, PDF server (bila perlu), penutupan periode, audit hak akses,
-checklist `SECURITY.md` §9, server produksi, cadangan terenkripsi, uji pemulihan.
+checklist `docs/architecture/SECURITY.md` §9, server produksi, cadangan terenkripsi, uji pemulihan.
 
 ## Tahap 9 — Go-live dan serah terima
 
@@ -75,10 +75,10 @@ siklus tahun ajaran baru (tahun ajaran, rombel, kenaikan kelas).
 
 | Waktu | Kegiatan | Siapa |
 |---|---|---|
-| Awal | Tinjau `PROGRESS.md`; PM menulis kartu tugas hari itu | PM + kamu |
+| Awal | Tinjau `docs/process/PROGRESS.md`; PM menulis kartu tugas hari itu | PM + kamu |
 | Inti | Eksekusi kartu satu per satu (satu cabang per tugas) | OpenCode / kamu |
 | Setiap tugas | Laporan baku → tugas ⚑ ditempel ke PM untuk review | Kamu → PM |
-| Akhir | Gabung ke `main` yang lulus tes; perbarui `PROGRESS.md`; catat keputusan/asumsi baru | Kamu |
+| Akhir | Gabung ke `main` yang lulus tes; perbarui `docs/process/PROGRESS.md`; catat keputusan/asumsi baru | Kamu |
 
 Push ke GitHub **tiap akhir hari** selama minggu demo (cadangan), lalu per fase setelahnya.
 
@@ -87,7 +87,7 @@ Push ke GitHub **tiap akhir hari** selama minggu demo (cadangan), lalu per fase 
 1. **Definition of Ready** kartu: tujuan, lingkup file, perintah + hasil yang diharapkan, kondisi berhenti.
 2. **Satu tugas gagal dua kali** → berhenti, bawa laporan ke PM; jangan mengulang tanpa diagnosis.
 3. **Rewrite besar** hanya setelah PM memeriksa apakah akar masalahnya di spesifikasi.
-4. **Pembekuan perubahan skema** setelah Hari 3: tambahan kolom lewat migrasi baru dan dicatat di `DATABASE.md`.
+4. **Pembekuan perubahan skema** setelah Hari 3: tambahan kolom lewat migrasi baru dan dicatat di `docs/architecture/DATABASE.md`.
 5. **Tidak ada data asli** di mana pun sebelum Tahap 8–9.
-6. Ketika tertinggal, potong sesuai **garis potong** di `BACKLOG.md`, bukan memperpanjang jam kerja.
-7. Setiap keputusan yang mengubah rancangan dicatat di `PROGRESS.md` (Log keputusan) dan dokumen terkait diperbarui.
+6. Ketika tertinggal, potong sesuai **garis potong** di `docs/product/BACKLOG.md`, bukan memperpanjang jam kerja.
+7. Setiap keputusan yang mengubah rancangan dicatat di `docs/process/PROGRESS.md` (Log keputusan) dan dokumen terkait diperbarui.
