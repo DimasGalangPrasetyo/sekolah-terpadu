@@ -120,7 +120,10 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 |---|---|---|---|
 | GET | `/dashboard` | Ringkasan per unit | D |
 | GET | `/reports/students`, `/reports/staff`, `/reports/assets` | Data laporan (dicetak dari frontend) | D |
-| GET | `/reports/finance/summary`, `/arrears`, `/cash-book`, `/daily-payments` | Laporan keuangan (filter unit, periode) | D |
+| GET | `/reports/finance/summary?date_from=&date_to=&unit=` | Ringkasan per unit: pembayaran siswa, kas masuk lain, pengeluaran, saldo (periode maks 366 hari) | D |
+| GET | `/reports/finance/arrears?unit=&academic_year_id=&as_of=&include_not_due=` | Tunggakan per siswa (tagihan terbuka yang jatuh tempo sebelum `as_of`; tanpa jatuh tempo dihitung) dengan subtotal per unit | D |
+| GET | `/reports/finance/cash-book?date_from=&date_to=&unit=` | Buku kas gabungan: pembayaran siswa + kas masuk + kas keluar, saldo awal dan saldo berjalan | D |
+| GET | `/reports/finance/daily-payments?date=&unit=` | Laporan kasir harian: pembayaran pada satu tanggal, total per metode, dan pembayaran yang dibatalkan | D |
 | GET | `/reports/*?format=csv` | Ekspor CSV | P |
 
 ## Throttle
