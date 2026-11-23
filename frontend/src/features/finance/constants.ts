@@ -106,3 +106,28 @@ export const CASH_STATUS_COLORS: Record<CashStatus, string> = {
   void: 'default',
 }
 
+// --- Cetak Laporan Keuangan ---
+
+export const REPORT_PAGE_A4_PORTRAIT: import('../reportcards/printSettings').EffectivePage = {
+  width: 210,
+  height: 297,
+  top: 12,
+  right: 12,
+  bottom: 12,
+  left: 12,
+  fontFamily: 'Arial, Helvetica, sans-serif',
+  fontSizePt: 9,
+}
+
+export const REPORT_PAGE_A4_LANDSCAPE: import('../reportcards/printSettings').EffectivePage = {
+  width: 297,
+  height: 210,
+  top: 12,
+  right: 12,
+  bottom: 12,
+  left: 12,
+  fontFamily: 'Arial, Helvetica, sans-serif',
+  fontSizePt: 9,
+}
+
+

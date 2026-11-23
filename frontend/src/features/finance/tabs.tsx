@@ -6,11 +6,13 @@ import { FeeRateTab } from './FeeRateTab'
 import { FeeTypeTab } from './FeeTypeTab'
 import { InvoiceTab } from './InvoiceTab'
 import { PaymentTab } from './PaymentTab'
+import { ReportTab } from './ReportTab'
 
 export interface FinanceTabItem {
   key: string
   label: string
   children: ReactNode
+  permission?: string
 }
 
 /**
@@ -19,6 +21,7 @@ export interface FinanceTabItem {
  * K-2F menambahkan tab Tagihan sebagai tab pertama (tab awal).
  * K-3F menambahkan tab Pembayaran sebagai tab kedua (setelah Tagihan).
  * K-4 menambahkan tab Kas (setelah Pembayaran) dan tab Kategori Kas (paling akhir).
+ * K-5F menambahkan tab Laporan (setelah Kas).
  */
 export const FINANCE_TABS: FinanceTabItem[] = [
   {
@@ -35,6 +38,12 @@ export const FINANCE_TABS: FinanceTabItem[] = [
     key: 'cash',
     label: 'Kas',
     children: <CashTab />,
+  },
+  {
+    key: 'reports',
+    label: 'Laporan',
+    children: <ReportTab />,
+    permission: 'reports.view',
   },
   {
     key: 'rates',

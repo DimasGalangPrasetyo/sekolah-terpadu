@@ -24,6 +24,14 @@ import type {
   StudentDiscount,
   StudentDiscountParams,
   StudentDiscountPayload,
+  SummaryReport,
+  SummaryReportParams,
+  ArrearsReport,
+  ArrearsReportParams,
+  CashBookReport,
+  CashBookReportParams,
+  DailyReport,
+  DailyReportParams,
 } from './types'
 
 // --- Jenis Biaya ---
@@ -245,4 +253,35 @@ export async function voidCashTransaction(id: number, reason: string): Promise<C
   const { data } = await http.post<{ data: CashTransaction }>(`/cash-transactions/${id}/void`, { reason })
   return data.data
 }
+
+// --- Laporan Keuangan ---
+
+export async function getSummaryReport(params: SummaryReportParams): Promise<SummaryReport> {
+  const { data } = await http.get<{ data: SummaryReport }>('/reports/finance/summary', { params })
+  return data.data
+}
+
+export async function getArrearsReport(params?: ArrearsReportParams): Promise<ArrearsReport> {
+  const formattedParams = params
+    ? {
+        ...params,
+        include_not_due: params.include_not_due ? 1 : 0,
+      }
+    : undefined
+  const { data } = await http.get<{ data: ArrearsReport }>('/reports/finance/arrears', {
+    params: formattedParams,
+  })
+  return data.data
+}
+
+export async function getCashBookReport(params: CashBookReportParams): Promise<CashBookReport> {
+  const { data } = await http.get<{ data: CashBookReport }>('/reports/finance/cash-book', { params })
+  return data.data
+}
+
+export async function getDailyReport(params: DailyReportParams): Promise<DailyReport> {
+  const { data } = await http.get<{ data: DailyReport }>('/reports/finance/daily-payments', { params })
+  return data.data
+}
+
 

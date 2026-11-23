@@ -331,3 +331,128 @@ export interface CashTransactionCreatePayload {
   description: string
 }
 
+// --- Laporan Keuangan ---
+
+export interface SummaryRow {
+  key: string
+  name: string
+  student_payments: number
+  student_payment_count: number
+  other_income: number
+  other_income_count: number
+  total_income: number
+  expense: number
+  expense_count: number
+  balance: number
+}
+
+export interface SummaryReport {
+  period: { from: string; to: string }
+  unit: string
+  rows: SummaryRow[]
+  total: Omit<SummaryRow, 'key' | 'name'>
+  generated_at: string
+}
+
+export interface SummaryReportParams {
+  date_from: string
+  date_to: string
+  unit?: string
+}
+
+export interface ArrearsInvoice {
+  number: string
+  kind: 'monthly' | 'one_time'
+  period_month: string | null
+  due_date: string | null
+  total_amount: number
+  paid_amount: number
+  outstanding: number
+  status: string
+}
+
+export interface ArrearsRow {
+  student: { id: number; nis: string | null; name: string } | null
+  unit: string | null
+  classroom: string | null
+  invoice_count: number
+  outstanding: number
+  oldest_due_date: string | null
+  days_overdue: number
+  invoices: ArrearsInvoice[]
+}
+
+export interface ArrearsReport {
+  as_of: string
+  include_not_due: boolean
+  unit: string
+  rows: ArrearsRow[]
+  by_unit: { unit: string | null; students: number; invoices: number; outstanding: number }[]
+  total: { students: number; invoices: number; outstanding: number }
+  generated_at: string
+}
+
+export interface ArrearsReportParams {
+  unit?: string
+  academic_year_id?: number
+  as_of?: string
+  include_not_due?: boolean | number
+}
+
+export interface CashBookEntry {
+  date: string
+  kind: 'student_payment' | 'cash_income' | 'cash_expense'
+  reference: string
+  description: string
+  unit: string | null
+  income: number
+  expense: number
+  balance: number
+}
+
+export interface CashBookReport {
+  period: { from: string; to: string }
+  unit: string
+  opening_balance: number
+  entries: CashBookEntry[]
+  total_income: number
+  total_expense: number
+  closing_balance: number
+  generated_at: string
+}
+
+export interface CashBookReportParams {
+  date_from: string
+  date_to: string
+  unit?: string
+}
+
+export interface DailyPaymentRow {
+  id: number
+  receipt_number: string
+  student: { nis: string | null; name: string } | null
+  method: 'cash' | 'transfer' | 'other'
+  reference: string | null
+  amount: number
+  received_by: string | null
+}
+
+export interface DailyReport {
+  date: string
+  unit: string
+  payments: DailyPaymentRow[]
+  by_method: { cash: number; transfer: number; other: number }
+  total: number
+  count: number
+  voided: (DailyPaymentRow & { void_reason: string | null })[]
+  voided_count: number
+  voided_amount: number
+  generated_at: string
+}
+
+export interface DailyReportParams {
+  date: string
+  unit?: string
+}
+
+

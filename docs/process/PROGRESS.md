@@ -24,6 +24,7 @@ Diperbarui setelah setiap tugas selesai. Pelaksana: U = kamu, C = Claude (chat),
 | K-3 frontend | Selesai | 2026-11-17 | Antigravity | Tab Pembayaran, kwitansi |
 | K-4 | Selesai | 2026-11-21 | Antigravity | Kas masuk/keluar dan kategori kas |
 | K-5 backend | Selesai | 2026-11 | PM | Laporan keuangan: ringkasan per unit, tunggakan, buku kas gabungan, laporan kasir harian |
+| K-5 frontend | Selesai | 2026-11-23 | Antigravity | Tab Laporan keuangan |
 
 (Status: Belum, Berjalan, Berhenti, Selesai)
 
