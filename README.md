@@ -84,6 +84,11 @@ dengan bantuan agen AI, lalu setiap paket diuji otomatis dan manual oleh pemilik
 `main`. Aturan kerja ada di [`AGENTS.md`](AGENTS.md); alur dan catatan kemajuan ada di
 [`docs/process/`](docs/process/).
 
+## Keamanan
+
+Temukan kerentanan? Jangan dibuka sebagai issue publik. Lihat [`SECURITY.md`](SECURITY.md) untuk cara melapor secara tertutup.
+Rancangan kontrol keamanan aplikasi ada di [`docs/architecture/SECURITY.md`](docs/architecture/SECURITY.md).
+
 ## Lisensi
 
 Hak cipta © 2026 Dimas Galang Prasetyo. Seluruh hak dilindungi. Lihat [`LICENSE`](LICENSE).

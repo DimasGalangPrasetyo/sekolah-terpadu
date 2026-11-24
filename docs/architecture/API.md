@@ -38,16 +38,12 @@ D = dibangun saat demo · P = pasca-demo. `*` = hanya rombel yang ia walikan (ta
 ## Siswa (TU tulis; SA baca; GU* baca)
 | Method | Path | Fungsi | Fase |
 |---|---|---|---|
-| GET/POST | `/students` | Daftar (filter unit, rombel, status, `q`) / buat | D |
-| GET/PUT/DELETE | `/students/{id}` | Detail / ubah / soft delete | D |
-| POST | `/students/{id}/photo` | Foto | D |
-| GET/POST | `/students/{id}/guardians` | Wali | D |
-| PUT/DELETE | `/guardians/{id}` | | D |
+| GET/POST | `/students` | Daftar (filter unit, rombel, status, `q`) / buat (termasuk `guardians[]` maks 4 dan penempatan rombel) | D |
+| GET/PUT/DELETE | `/students/{id}` | Detail (memuat wali dan 20 riwayat status terakhir di `status_logs`) / ubah (sinkronisasi `guardians[]`) / soft delete | D |
+| POST | `/students/{id}/photo` | Foto (belum dibangun) | P |
 | POST | `/students/{id}/status` | Mutasi (pindah, keluar, lulus, nonaktif) | D |
-| GET | `/students/{id}/status-logs` | Riwayat | D |
-| GET | `/classrooms/{id}/students` | Siswa dalam rombel | D |
-| POST | `/classrooms/{id}/enroll` | Masukkan siswa (massal) | D |
-| DELETE | `/enrollments/{id}` | Keluarkan dari rombel | D |
+| PUT | `/students/{id}/enrollment` | Tempatkan atau pindahkan siswa ke rombel tahun ajaran aktif | D |
+| POST | `/classrooms/{id}/enroll` | Masukkan siswa ke rombel secara massal (belum dibangun; saat ini satu per satu lewat `/students/{id}/enrollment`) | P |
 | POST | `/enrollments/promote` | Kenaikan kelas/lanjut jenjang massal | P |
 | GET/POST | `/students/import`, `/students/import/template` | Impor CSV/Excel | P |
 
@@ -93,7 +89,7 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 | GET/POST | `/invoices` | Daftar (filter unit, status, periode, siswa) / manual | D |
 | GET | `/invoices/{id}` | Detail | D |
 | POST | `/invoices/{id}/void` | Void (alasan) | D |
-| GET | `/students/{id}/billing` | Tunggakan siswa (rencana, bagian laporan K-5) | P |
+| GET | `/students/{id}/billing` | Tunggakan satu siswa (belum dibangun; gunakan `/invoices?student_id=` dan `/payments/open-invoices?student_id=`) | P |
 | GET/POST | `/payments` | Daftar / catat (alokasi otomatis ke tagihan terlama, atau eksplisit per tagihan; kelebihan bayar ditolak) | D |
 | GET | `/payments/open-invoices?student_id=` | Tagihan terbuka siswa, urut terlama (urutan alokasi otomatis) | D |
 | GET | `/payments/{id}`, `/payments/{id}/receipt` | Detail / data kwitansi | D |
@@ -118,8 +114,8 @@ Preview dirender di frontend dari template + data; tidak ada endpoint preview.
 ## Dashboard dan laporan (SA, TU; GU hanya progres rapor rombelnya)
 | Method | Path | Fungsi | Fase |
 |---|---|---|---|
-| GET | `/dashboard` | Ringkasan per unit | D |
-| GET | `/reports/students`, `/reports/staff`, `/reports/assets` | Data laporan (dicetak dari frontend) | D |
+| GET | `/dashboard` | Ringkasan per unit (belum dibangun, tugas A-19) | D |
+| GET | `/reports/students`, `/reports/staff`, `/reports/assets` | Data laporan siswa, staf, aset (belum dibangun) | P |
 | GET | `/reports/finance/summary?date_from=&date_to=&unit=` | Ringkasan per unit: pembayaran siswa, kas masuk lain, pengeluaran, saldo (periode maks 366 hari) | D |
 | GET | `/reports/finance/arrears?unit=&academic_year_id=&as_of=&include_not_due=` | Tunggakan per siswa (tagihan terbuka yang jatuh tempo sebelum `as_of`; tanpa jatuh tempo dihitung) dengan subtotal per unit | D |
 | GET | `/reports/finance/cash-book?date_from=&date_to=&unit=` | Buku kas gabungan: pembayaran siswa + kas masuk + kas keluar, saldo awal dan saldo berjalan | D |
